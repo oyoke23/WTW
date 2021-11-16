@@ -5,6 +5,12 @@ dependencyResolutionManagement {
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
     }
+    pluginManagement{
+        plugins{
+            id 'org.jetbrains.kotlin.multiplatform' version '1.5.31'
+            id 'org.jetbrains.kotlin.plugin.serialization' version '1.5.31'
+        }
+    }
 }
 rootProject.name = "NSQL Project"
 include ':app'
