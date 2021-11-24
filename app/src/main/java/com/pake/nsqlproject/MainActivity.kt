@@ -69,4 +69,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
+    fun initRecycler(allData: AllData){
+        binding.rvBookList.layoutManager = LinearLayoutManager(this)
+        val adapter = BookAdapter(allData.personalList[0].books)
+
+        binding.rvBookList.adapter = adapter
+    }
 }
