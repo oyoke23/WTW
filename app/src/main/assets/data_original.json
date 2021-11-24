@@ -13,6 +13,7 @@
       "books": [
         {
           "name": "Libro1",
+          "image": "src/img.png",
           "status": "Reading",
           "readCh": "12",
           "totalCh": "?",
@@ -20,6 +21,7 @@
         },
         {
           "name": "Libro2",
+          "image": "src/img2.png",
           "status": "Reading",
           "readCh": "13",
           "totalCh": "?",
@@ -34,6 +36,7 @@
       "books": [
         {
           "name": "Libro3",
+          "image": "src/img.png",
           "status": "Reading",
           "readCh": "18",
           "totalCh": "?",
@@ -41,6 +44,7 @@
         },
         {
           "name": "Libro4",
+          "image": "src/img2.png",
           "status": "Reading",
           "readCh": "53",
           "totalCh": "?",
