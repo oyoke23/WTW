@@ -1,5 +1,6 @@
 package com.pake.nsqlproject
 
+import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,7 +16,6 @@ import com.pake.nsqlproject.databinding.ActivityMainBinding
 import com.pake.nsqlproject.databinding.AppBarMainBinding
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
-
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var drawer: DrawerLayout
@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val navigationView: NavigationView = binding.navView
         navigationView.setNavigationItemSelectedListener (this)
+
+        // open and show the HomeFragment
+        val fragment = HomeFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -69,10 +73,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    fun initRecycler(allData: AllData){
-        binding.rvBookList.layoutManager = LinearLayoutManager(this)
-        val adapter = BookAdapter(allData.personalList[0].books)
 
-        binding.rvBookList.adapter = adapter
-    }
 }
