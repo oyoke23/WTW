@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group>
-        <item android:id="@+id/nav_item_one"
+        <item android:id="@+id/homeFragment"
             android:icon="@drawable/abc_vector_test"
-            android:title="Item 1"/>
-        <item android:id="@+id/nav_item_two"
+            android:title="Home"/>
+        <item android:id="@+id/dashboardFragment"
             android:icon="@drawable/abc_vector_test"
-            android:title="Item 2"/>
-        <item android:id="@+id/nav_item_three"
+            android:title="Dashboard"/>
+        <item android:id="@+id/settingsFragment"
             android:icon="@drawable/abc_vector_test"
-            android:title="Item 3"/>
+            android:title="Settings"/>
     </group>
 
     <item android:title="Title 1">
