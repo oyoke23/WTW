@@ -9,7 +9,7 @@
     {
       "id": "1",
       "user": "-1",
-      "name": "List1",
+      "name": "List 1",
       "books": [
         {
           "name": "Libro1",
@@ -22,7 +22,7 @@
           "name": "Libro2",
           "status": "Reading",
           "readCh": "13",
-          "totalCh": "?",
+          "totalCh": "32",
           "score": "8.4"
         }
       ]
@@ -30,7 +30,7 @@
     {
       "id": "2",
       "user": "-1",
-      "name": "List2",
+      "name": "List 2",
       "books": [
         {
           "name": "Libro3",

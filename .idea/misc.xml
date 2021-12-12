@@ -3,11 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/chapters_book.xml" value="0.1805" />
+        <entry key="app/src/main/res/drawable/rounded_edge.xml" value="0.1835" />
+        <entry key="app/src/main/res/drawable/score_book.xml" value="0.2155" />
+        <entry key="app/src/main/res/drawable/status_book.xml" value="0.1805" />
+        <entry key="app/src/main/res/drawable/title_book.xml" value="0.2155" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.553125" />
-        <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.553125" />
+        <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.553125" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.18085106382978725" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.3296875" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3296875" />
+        <entry key="app/src/main/res/layout/item_book.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.21105072463768115" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.3296875" />
       </map>
     </option>
