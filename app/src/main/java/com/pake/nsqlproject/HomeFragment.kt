@@ -2,11 +2,11 @@ package com.pake.nsqlproject
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pake.nsqlproject.databinding.FragmentHomeBinding
 import java.io.IOException
@@ -27,6 +27,8 @@ class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -73,10 +75,11 @@ class HomeFragment : Fragment() {
             }
     }
 
-    fun homeMain() {
+    private fun homeMain() {
         val jsonFileString = activity?.let { getJsonDataFromAsset(it.applicationContext, "data.json") }
         val allData = jsonFileString?.let { Json.decodeFromString<AllData>(it) }
         if (allData != null) {
+            sharedViewModel.saveAllData(allData)
             initRecycler(allData)
         }
     }
