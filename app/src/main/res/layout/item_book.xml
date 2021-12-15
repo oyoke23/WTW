@@ -3,19 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="130dp"
     android:layout_marginTop="10dp"
-
+    android:layout_marginHorizontal="15dp"
+    android:background="@drawable/book_rounded_edge"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/ivBook"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:orientation="vertical"/>
+        android:orientation="vertical" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <TextView
             android:id="@+id/tvTitle"
@@ -24,40 +26,86 @@
             android:textSize="21sp"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="15dp"
+            android:width="200dp"
+            android:gravity="center"
+            android:background="@drawable/title_book"
+            android:textColor="@color/white"/>
 
-        <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="58dp">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-            <TextView
-                android:id="@+id/tvReadCh"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp" />
+                android:layout_height="match_parent"
+                android:layout_weight=".50"
+                android:orientation="vertical"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/tvTotalCh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="25dp" />
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/status_book"
+                    android:width="100dp"
+                    android:layout_marginBottom="2dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:padding="5dp"/>
 
-            <TextView
-                android:id="@+id/tvScore"
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/chapters_book"
+                    android:gravity="center"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/tvReadCh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="/"
+                        android:paddingHorizontal="5dp"/>
+
+                    <TextView
+                        android:id="@+id/tvTotalCh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="130dp"
-                android:textSize="28sp"
-                android:textStyle="bold"/>
+                android:layout_height="match_parent"
+                android:layout_weight=".50"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:background="@drawable/score_book"
+                    android:padding="10dp"
+                    />
+
+            </LinearLayout>
+
         </LinearLayout>
-
-
     </LinearLayout>
 </LinearLayout>

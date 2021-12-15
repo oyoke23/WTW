@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/blankFragment">
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.pake.nsqlproject.HomeFragment"
@@ -18,4 +18,9 @@
         android:id="@+id/settingsFragment"
         android:name="com.pake.nsqlproject.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.pake.nsqlproject.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" />
 </navigation>
