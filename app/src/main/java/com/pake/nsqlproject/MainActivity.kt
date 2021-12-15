@@ -1,23 +1,16 @@
 package com.pake.nsqlproject
 
-import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.pake.nsqlproject.databinding.ActivityMainBinding
-import com.pake.nsqlproject.databinding.AppBarMainBinding
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
     private lateinit var binding: ActivityMainBinding
@@ -45,6 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.homeFragment -> replaceFragment(HomeFragment(), item.title.toString())
+            R.id.addBookFragment -> replaceFragment(AddBookFragment(), item.title.toString())
             R.id.dashboardFragment -> replaceFragment(DashboardFragment(), item.title.toString())
             R.id.settingsFragment -> replaceFragment(SettingsFragment(), item.title.toString())
         }
