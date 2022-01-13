@@ -3,32 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable/book_rounded_edge.xml" value="0.363" />
-        <entry key="app/src/main/res/drawable/chapters_book.xml" value="0.1805" />
-        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.363" />
-        <entry key="app/src/main/res/drawable/rounded_edge.xml" value="0.1835" />
-        <entry key="app/src/main/res/drawable/score_book.xml" value="0.2155" />
-        <entry key="app/src/main/res/drawable/status_book.xml" value="0.1805" />
-        <entry key="app/src/main/res/drawable/title_book.xml" value="0.2155" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/booklist_layout.xml" value="0.3691123188405797" />
-        <entry key="app/src/main/res/layout/content_main.xml" value="0.3969849246231156" />
-        <entry key="app/src/main/res/layout/fragment_add_book.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.18085106382978725" />
-        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.3296875" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3296875" />
-        <entry key="app/src/main/res/layout/item_book.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.21105072463768115" />
-        <entry key="app/src/main/res/layout/spinner_item.xml" value="0.3088768115942029" />
-        <entry key="app/src/main/res/layout/status_text.xml" value="0.3088768115942029" />
-        <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.3296875" />
-        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.3691123188405797" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23177083333333334" />
+        <entry key="app/src/main/res/drawable/book_rounded_edge.xml" value="0.23177083333333334" />
+        <entry key="app/src/main/res/drawable/chapters_book.xml" value="0.23177083333333334" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.23177083333333334" />
+        <entry key="app/src/main/res/drawable/score_book.xml" value="0.23177083333333334" />
+        <entry key="app/src/main/res/drawable/status_book.xml" value="0.23177083333333334" />
+        <entry key="app/src/main/res/drawable/title_book.xml" value="0.23177083333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout/fragment_add_book.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout/item_book.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout/spinner_item.xml" value="0.215625" />
       </map>
     </option>
   </component>
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
   </component>
 </project>

@@ -10,7 +10,11 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import com.pake.nsqlproject.ui.addbook.AddBookFragment
+import com.pake.nsqlproject.ui.dashboard.DashboardFragment
 import com.pake.nsqlproject.databinding.ActivityMainBinding
+import com.pake.nsqlproject.ui.home.HomeFragment
+import com.pake.nsqlproject.ui.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
     private lateinit var binding: ActivityMainBinding

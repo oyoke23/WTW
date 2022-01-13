@@ -1,7 +1,8 @@
-package com.pake.nsqlproject
+package com.pake.nsqlproject.ui.settings
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
+import com.pake.nsqlproject.R
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

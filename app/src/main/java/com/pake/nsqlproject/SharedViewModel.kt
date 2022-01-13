@@ -2,8 +2,7 @@ package com.pake.nsqlproject
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+import com.pake.nsqlproject.data.AllData
 
 class SharedViewModel: ViewModel() {
     private var _allData = MutableLiveData<AllData>()
@@ -12,5 +11,4 @@ class SharedViewModel: ViewModel() {
     fun saveAllData(data: AllData) {
         _allData.value = data
     }
-
 }

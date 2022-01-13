@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.databinding.ItemBookBinding
 
 class BookAdapter(private val bookList: List<Book>): RecyclerView.Adapter<BookAdapter.BookHolder>() {

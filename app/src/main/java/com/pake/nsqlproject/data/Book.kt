@@ -1,4 +1,4 @@
-package com.pake.nsqlproject
+package com.pake.nsqlproject.data
 import kotlinx.serialization.Serializable
 
 @Serializable
