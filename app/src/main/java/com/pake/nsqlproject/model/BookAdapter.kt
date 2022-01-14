@@ -1,9 +1,10 @@
-package com.pake.nsqlproject
+package com.pake.nsqlproject.model
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.pake.nsqlproject.R
 import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.databinding.ItemBookBinding
 
