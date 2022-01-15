@@ -1,19 +1,25 @@
 package com.pake.nsqlproject.ui.addbook
 
+import android.content.Context
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.R
 import com.pake.nsqlproject.SharedViewModel
 import com.pake.nsqlproject.databinding.FragmentAddBookBinding
+import com.pake.nsqlproject.model.ManageData
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+
 
 class AddBookFragment : Fragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels()
@@ -82,6 +88,7 @@ class AddBookFragment : Fragment() {
     }
 
     private fun addBook() {
+        val manageData = ManageData(requireContext())
         sharedViewModel.allData.value?.personalList?.get(binding.spLists.selectedItemPosition)?.books?.add(
             Book(
                 binding.etTitle.text.toString(),
@@ -92,11 +99,9 @@ class AddBookFragment : Fragment() {
             )
         )
 
-        sharedViewModel.allData.value?.personalList?.get(binding.spLists.selectedItemPosition)?.books?.forEach {
-            Log.i("Book", it.name)
-        }
+        manageData.setData(sharedViewModel.allData.value)
 
-        val jsonString = Json.encodeToString(sharedViewModel.allData.value)
-        Log.i("JSON", jsonString)
+        Toast.makeText(requireContext(), "Book added", Toast.LENGTH_SHORT).show()
+        // TODO: Clear data from fields and go back to home fragment
     }
 }
