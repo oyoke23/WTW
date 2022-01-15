@@ -2,6 +2,7 @@ package com.pake.nsqlproject.ui.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pake.nsqlproject.data.AllData
 import com.pake.nsqlproject.SharedViewModel
-import com.pake.nsqlproject.BookAdapter
+import com.pake.nsqlproject.model.BookAdapter
 import com.pake.nsqlproject.databinding.FragmentHomeBinding
-import java.io.IOException
+import com.pake.nsqlproject.model.ManageData
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
@@ -22,11 +23,6 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,23 +39,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun homeMain() {
-        val jsonFileString = activity?.let { getJsonDataFromAsset(it.applicationContext, "data.json") }
-        val allData = jsonFileString?.let { Json.decodeFromString<AllData>(it) }
+        val manageData = ManageData(requireContext())
+        val allData = manageData.getData()
+
         if (allData != null) {
             sharedViewModel.saveAllData(allData)
             initRecycler(allData)
         }
-    }
-
-    private fun getJsonDataFromAsset(context: Context, fileName: String): String? {
-        val jsonString: String
-        try {
-            jsonString = context.assets.open(fileName).bufferedReader().use { it.readText() }
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
-            return null
-        }
-        return jsonString
     }
 
     private fun initRecycler(allData: AllData){
