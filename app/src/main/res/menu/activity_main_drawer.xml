@@ -10,6 +10,11 @@
             android:icon="@drawable/ic_baseline_add_book_24"
             android:title="@string/add_book" />
 
+        <item
+            android:id="@+id/addListFragment"
+            android:icon="@drawable/ic_baseline_add_list_24"
+            android:title="@string/add_list" />
+
         <item android:id="@+id/settingsFragment"
             android:icon="@drawable/ic_baseline_settings_24"
             android:title="@string/settings"/>

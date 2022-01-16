@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddBookFragment"
+    tools:context=".ui.addbook.AddBookFragment"
     android:background="#014362">
 
    <LinearLayout
@@ -33,11 +33,11 @@
 
        <EditText
            android:id="@+id/etTitle"
-           android:layout_width="wrap_content"
+           android:layout_width="173dp"
            android:layout_height="wrap_content"
            android:ems="10"
            android:inputType="textPersonName"
-           android:textColor="@color/white"/>
+           android:textColor="@color/white" />
 
        <TextView
            android:layout_width="wrap_content"
