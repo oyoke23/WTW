@@ -89,7 +89,8 @@ class AddBookFragment : Fragment() {
 
     private fun addBook() {
         val manageData = ManageData(requireContext())
-        sharedViewModel.allData.value?.personalList?.get(binding.spLists.selectedItemPosition)?.books?.add(
+        var tempData = sharedViewModel.allData.value
+        tempData?.personalList?.get(binding.spLists.selectedItemPosition)?.books?.add(
             Book(
                 binding.etTitle.text.toString(),
                 parseStatus(binding.spStatus.selectedItemPosition),
@@ -99,7 +100,7 @@ class AddBookFragment : Fragment() {
             )
         )
 
-        manageData.setData(sharedViewModel.allData.value)
+        manageData.setData(tempData!!)
 
         Toast.makeText(requireContext(), "Book added", Toast.LENGTH_SHORT).show()
         // TODO: Clear data from fields and go back to home fragment
