@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
 import com.pake.nsqlproject.ui.addbook.AddBookFragment
 import com.pake.nsqlproject.databinding.ActivityMainBinding
@@ -26,12 +27,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar_main)
-        setSupportActionBar(toolbar)
         drawer = binding.drawerLayout
 
-        toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        toggle = ActionBarDrawerToggle(this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
+        toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
@@ -46,13 +46,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.addListFragment -> replaceFragment(AddListFragment(), item.title.toString())
             R.id.settingsFragment -> replaceFragment(SettingsFragment(), item.title.toString())
         }
+        //R.id.homeFragment -> Navigation.findNavController(this,R.id.my_nav).navigate(R.id.homeFragment)
+        //R.id.addBookFragment -> Navigation.findNavController(this,R.id.my_nav).navigate(R.id.addBookFragment)
+        //R.id.addListFragment -> Navigation.findNavController(this,R.id.my_nav).navigate(R.id.addListFragment)
+        //R.id.settingsFragment -> Navigation.findNavController(this,R.id.my_nav).navigate(R.id.settingsFragment)
         return true
     }
 
     private fun replaceFragment(fragment: Fragment, title : String){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment,fragment)
+        fragmentTransaction.replace(R.id.fragmentContainerView,fragment)
         fragmentTransaction.commit()
         drawer.closeDrawer(GravityCompat.START)
         setTitle(title)
