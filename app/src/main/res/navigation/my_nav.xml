@@ -15,9 +15,6 @@
         <action
             android:id="@+id/action_homeFragment_to_addBookFragment"
             app:destination="@id/addBookFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_addListFragment2"
-            app:destination="@id/addListFragment2" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -40,9 +37,6 @@
         android:id="@+id/addListFragment2"
         android:name="com.pake.nsqlproject.ui.addlist.AddListFragment"
         android:label="fragment_add_list"
-        tools:layout="@layout/fragment_add_list" >
-        <action
-            android:id="@+id/action_addListFragment2_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_add_list" />
+
 </navigation>
