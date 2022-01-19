@@ -1,4 +1,8 @@
-package com.pake.nsqlproject.ui.settings
+package com.pake.nsqlproject.ui.settings/* override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        toggle.onConfigurationChanged(newConfig)
+    }*/
+
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
