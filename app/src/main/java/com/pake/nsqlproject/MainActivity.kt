@@ -1,25 +1,18 @@
 package com.pake.nsqlproject
 
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
-import com.pake.nsqlproject.ui.addbook.AddBookFragment
 import com.pake.nsqlproject.databinding.ActivityMainBinding
-import com.pake.nsqlproject.ui.addlist.AddListFragment
-import com.pake.nsqlproject.ui.home.HomeFragment
-import com.pake.nsqlproject.ui.settings.SettingsFragment
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
+
+class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
-    private lateinit var drawer: DrawerLayout
+    private lateinit var drawerLayout: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,41 +20,41 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        drawer = binding.drawerLayout
+        drawerLayout = binding.drawerLayout
 
-        toggle = ActionBarDrawerToggle(this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer.addDrawerListener(toggle)
+        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.title = "Home"
 
         val navigationView: NavigationView = binding.navView
-        navigationView.setNavigationItemSelectedListener (this)
-    }
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.homeFragment -> replaceFragment(HomeFragment(), item.title.toString())
-            R.id.addBookFragment -> replaceFragment(AddBookFragment(), item.title.toString())
-            R.id.addListFragment -> replaceFragment(AddListFragment(), item.title.toString())
-            R.id.settingsFragment -> replaceFragment(SettingsFragment(), item.title.toString())
+        navigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.homeFragment -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
+                    supportActionBar?.title = "Home"
+                }
+                R.id.addBookFragment -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.addBookFragment)
+                    supportActionBar?.title = "Add Book"
+                }
+                R.id.addListFragment -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.addListFragment2)
+                    supportActionBar?.title = "Add List"
+                }
+                R.id.settingsFragment -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.settingsFragment)
+                    supportActionBar?.title = "Settings"
+                }
+            }
+            drawerLayout.closeDrawers()
+            true
         }
-        //R.id.homeFragment -> Navigation.findNavController(this,R.id.my_nav).navigate(R.id.homeFragment)
-        //R.id.addBookFragment -> Navigation.findNavController(this,R.id.my_nav).navigate(R.id.addBookFragment)
-        //R.id.addListFragment -> Navigation.findNavController(this,R.id.my_nav).navigate(R.id.addListFragment)
-        //R.id.settingsFragment -> Navigation.findNavController(this,R.id.my_nav).navigate(R.id.settingsFragment)
-        return true
     }
 
-    private fun replaceFragment(fragment: Fragment, title : String){
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainerView,fragment)
-        fragmentTransaction.commit()
-        drawer.closeDrawer(GravityCompat.START)
-        setTitle(title)
-    }
-    override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+    /*override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onPostCreate(savedInstanceState, persistentState)
         toggle.syncState()
     }
@@ -69,7 +62,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         toggle.onConfigurationChanged(newConfig)
-    }
+    }*/
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)){
