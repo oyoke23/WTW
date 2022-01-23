@@ -35,7 +35,8 @@ class AddListFragment : Fragment() {
     private fun handleAddList() {
         val manageData = ManageData(requireContext())
         var tempData = sharedViewModel.allData.value
-        tempData?.personalList?.add(PersonalList(binding.etListName.text.toString(), "-1", binding.etListName.text.toString(), mutableListOf<Book>()))
+
+        tempData?.personalList?.add(PersonalList(sharedViewModel.allData.value?.personalList?.size.toString(), "-1", binding.etListName.text.toString(), mutableListOf<Book>()))
 
         manageData.setData(tempData!!)
 
