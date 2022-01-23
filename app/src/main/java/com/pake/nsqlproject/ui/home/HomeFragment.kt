@@ -9,11 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.pake.nsqlproject.data.AllData
 import com.pake.nsqlproject.SharedViewModel
 import com.pake.nsqlproject.model.BookAdapter
 import com.pake.nsqlproject.databinding.FragmentHomeBinding
 import com.pake.nsqlproject.model.ManageData
+import com.pake.nsqlproject.model.ViewPagerAdapter
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
@@ -43,16 +47,15 @@ class HomeFragment : Fragment() {
         val allData = manageData.getData()
 
         if (allData != null) {
+            val tabLayout = binding.tabLayout
+            val viewPager = binding.vpBookList
+            val adapter = ViewPagerAdapter(this, allData.personalList)
+
             sharedViewModel.saveAllData(allData)
-            initRecycler(allData)
+            viewPager.adapter = adapter
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                tab.text = allData.personalList[position].name
+            }.attach()
         }
-    }
-
-    private fun initRecycler(allData: AllData){
-        binding.tvListTitle.text = allData.personalList[0].name
-        binding.rvBookList.layoutManager = LinearLayoutManager(context)
-        val adapter = BookAdapter(allData.personalList[0].books)
-
-        binding.rvBookList.adapter = adapter
     }
 }

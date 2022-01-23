@@ -47,16 +47,23 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
+    // Kotlin Serialization
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1"
+
+    // RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
 
-    //Menu implementation
+    // Menu implementation
     implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.preference:preference-ktx:1.1.1'
 
-    //profile icon
+    // Profile icon
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // ViewPager2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
 }
