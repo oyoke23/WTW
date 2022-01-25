@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.pake.nsqlproject.data.Book
@@ -21,7 +22,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 
-class AddBookFragment : Fragment() {
+class AddBookFragment : DialogFragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private var _binding: FragmentAddBookBinding? = null
@@ -35,11 +36,13 @@ class AddBookFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        //var rootView: View = inflater.inflate(R.layout.fragment_add_book,container,false)
         // Inflate the layout for this fragment
         _binding = FragmentAddBookBinding.inflate(inflater, container, false)
         mainAddBook()
         binding.btnAddBook.setOnClickListener {
             addBook()
+            dismiss()
         }
         return binding.root
     }

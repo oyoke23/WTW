@@ -1,54 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.addlist.AddListFragment"
     android:background="#014362">
 
-    <TextView
-        android:id="@+id/tvAddListTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add a new list"
-        android:textColor="#ffffff"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.088" />
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="600dp"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <EditText
-        android:id="@+id/etListName"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:hint="List name"
-        android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAddListTitle"
+        <TextView
+            android:id="@+id/tvAddListTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add a new list"
+            android:textColor="#ffffff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-        app:layout_constraintVertical_bias="0.168" />
+        <EditText
+            android:id="@+id/etListName"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="List name"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btnAddList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add list"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAddListTitle"
-        app:layout_constraintVertical_bias="0.736" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btnAddList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add list"
+            android:textColor="#ffffff"
+            android:textSize="20sp"/>
+    </LinearLayout>
+</FrameLayout>
