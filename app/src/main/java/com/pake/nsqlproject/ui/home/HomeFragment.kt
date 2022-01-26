@@ -1,25 +1,16 @@
 package com.pake.nsqlproject.ui.home
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.pake.nsqlproject.data.AllData
 import com.pake.nsqlproject.SharedViewModel
-import com.pake.nsqlproject.model.BookAdapter
 import com.pake.nsqlproject.databinding.FragmentHomeBinding
 import com.pake.nsqlproject.model.ManageData
 import com.pake.nsqlproject.model.ViewPagerAdapter
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
 
 class HomeFragment : Fragment() {
 
