@@ -1,5 +1,6 @@
 package com.pake.nsqlproject
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -12,7 +13,7 @@ import com.pake.nsqlproject.ui.addbook.AddBookFragment
 import com.pake.nsqlproject.ui.addlist.AddListFragment
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(), DialogInterface.OnDismissListener{
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
@@ -39,16 +40,16 @@ class MainActivity : AppCompatActivity(){
                     supportActionBar?.title = "Home"
                 }
                 R.id.addBookFragment -> {
+                    /*findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
+                    supportActionBar?.title = "Home"*/
                     var dialog = AddBookFragment()
                     dialog.show(supportFragmentManager,"addBook")
-                    //findNavController(R.id.nav_host_fragment).navigate(R.id.addBookFragment)
-                    //supportActionBar?.title = "Add Book"
                 }
                 R.id.addListFragment -> {
+                    /*findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
+                    supportActionBar?.title = "Home"*/
                     var dialog = AddListFragment()
                     dialog.show(supportFragmentManager,"addList")
-                    //findNavController(R.id.nav_host_fragment).navigate(R.id.addListFragment2)
-                    //supportActionBar?.title = "Add List"
                 }
                 R.id.settingsFragment -> {
                     findNavController(R.id.nav_host_fragment).navigate(R.id.settingsFragment)
@@ -76,5 +77,9 @@ class MainActivity : AppCompatActivity(){
         }
         return super.onOptionsItemSelected(item)
 
+    }
+
+    override fun onDismiss(p0: DialogInterface?) {
+        findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
     }
 }

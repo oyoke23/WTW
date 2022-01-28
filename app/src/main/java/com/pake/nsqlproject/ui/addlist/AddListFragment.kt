@@ -42,5 +42,4 @@ class AddListFragment : DialogFragment() {
         Toast.makeText(requireContext(), "List added", Toast.LENGTH_SHORT).show()
         // TODO: Clear data from fields and go back to home fragment
     }
-
 }
