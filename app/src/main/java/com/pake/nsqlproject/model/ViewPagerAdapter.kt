@@ -11,5 +11,7 @@ class ViewPagerAdapter(fragment: Fragment, private val personalLists: MutableLis
     override fun createFragment(position: Int): Fragment {
         return BookListFragment(personalLists[position])
     }
+
+
 }
 

@@ -1,45 +1,37 @@
 package com.pake.nsqlproject.ui.addbook
 
-import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.R
 import com.pake.nsqlproject.SharedViewModel
 import com.pake.nsqlproject.databinding.FragmentAddBookBinding
 import com.pake.nsqlproject.model.ManageData
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 
-class AddBookFragment : Fragment() {
+class AddBookFragment : DialogFragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private var _binding: FragmentAddBookBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentAddBookBinding.inflate(inflater, container, false)
         mainAddBook()
         binding.btnAddBook.setOnClickListener {
             addBook()
+            dismiss()
         }
         return binding.root
     }
