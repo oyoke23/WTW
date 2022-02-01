@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pake.nsqlproject.R
 import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.databinding.ItemBookBinding
+import com.pake.nsqlproject.ui.booklist.BookListFragment
 
-class BookAdapter(private val bookList: List<Book>): RecyclerView.Adapter<BookAdapter.BookHolder>() {
+class BookAdapter(private val bookList: List<Book>, private val clickListener: BookListFragment): RecyclerView.Adapter<BookAdapter.BookHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -21,8 +22,8 @@ class BookAdapter(private val bookList: List<Book>): RecyclerView.Adapter<BookAd
 
     override fun getItemCount(): Int = bookList.size
 
-    class BookHolder(view: View): RecyclerView.ViewHolder(view){
-        val binding = ItemBookBinding.bind(view)
+    inner class BookHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
+        private val binding = ItemBookBinding.bind(view)
 
         fun render(book: Book) {
             binding.tvTitle.text = book.name
@@ -31,5 +32,30 @@ class BookAdapter(private val bookList: List<Book>): RecyclerView.Adapter<BookAd
             binding.tvTotalCh.text = book.totalCh
             binding.tvScore.text = book.score
         }
+
+        init {
+            itemView.setOnClickListener(this)
+            itemView.setOnLongClickListener(this)
+        }
+
+        override fun onClick(p0: View?) {
+            val position = bindingAdapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                clickListener.onItemClick(position)
+            }
+        }
+
+        override fun onLongClick(p0: View?): Boolean {
+            val position = bindingAdapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                clickListener.onItemLongClick(position)
+            }
+            return true
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+        fun onItemLongClick(position: Int)
     }
 }

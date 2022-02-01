@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pake.nsqlproject.SharedViewModel
+import com.pake.nsqlproject.data.PersonalList
 import com.pake.nsqlproject.databinding.FragmentHomeBinding
 import com.pake.nsqlproject.model.ManageData
 import com.pake.nsqlproject.model.ViewPagerAdapter
@@ -18,6 +21,8 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private var personalLists: MutableList<PersonalList> = mutableListOf()
+    private lateinit var viewPagerAdapter: ViewPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +45,29 @@ class HomeFragment : Fragment() {
         if (allData != null) {
             val tabLayout = binding.tabLayout
             val viewPager = binding.vpBookList
-            val adapter = ViewPagerAdapter(this, allData.personalList)
+            personalLists = allData.personalList
+            viewPagerAdapter = ViewPagerAdapter(this, personalLists)
 
             sharedViewModel.saveAllData(allData)
-            viewPager.adapter = adapter
+            viewPager.adapter = viewPagerAdapter
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = allData.personalList[position].name
             }.attach()
+
+            // On long click on tab in tablayout delete the tab
+            val tabs = binding.tabLayout.getChildAt(0) as ViewGroup
+            for (i in 0 until tabs.childCount) {
+                tabs.getChildAt(i).setOnLongClickListener {
+                    // get the position of the clicked tab
+                    val position = tabs.indexOfChild(it)
+                    personalLists.removeAt(position)
+                    manageData.setData(allData)
+                    Toast.makeText(requireContext(), "Tab deleted ${position+1}", Toast.LENGTH_SHORT).show()
+                    viewPagerAdapter.notifyItemRemoved(position)
+                    true
+                }
+            }
+
         }
     }
 }
