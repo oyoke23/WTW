@@ -13,7 +13,7 @@ import com.pake.nsqlproject.ui.addbook.AddBookFragment
 import com.pake.nsqlproject.ui.addlist.AddListFragment
 
 
-class MainActivity : AppCompatActivity(), DialogInterface.OnDismissListener{
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
@@ -40,14 +40,10 @@ class MainActivity : AppCompatActivity(), DialogInterface.OnDismissListener{
                     supportActionBar?.title = "Home"
                 }
                 R.id.addBookFragment -> {
-                    /*findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
-                    supportActionBar?.title = "Home"*/
                     var dialog = AddBookFragment()
                     dialog.show(supportFragmentManager,"addBook")
                 }
                 R.id.addListFragment -> {
-                    /*findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
-                    supportActionBar?.title = "Home"*/
                     var dialog = AddListFragment()
                     dialog.show(supportFragmentManager,"addList")
                 }
@@ -61,25 +57,11 @@ class MainActivity : AppCompatActivity(), DialogInterface.OnDismissListener{
         }
     }
 
-    /*override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onPostCreate(savedInstanceState, persistentState)
-        toggle.syncState()
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        toggle.onConfigurationChanged(newConfig)
-    }*/
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)){
             return true
         }
         return super.onOptionsItemSelected(item)
 
-    }
-
-    override fun onDismiss(p0: DialogInterface?) {
-        findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
     }
 }

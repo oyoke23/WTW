@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.NavHostFragment
 import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.R
 import com.pake.nsqlproject.SharedViewModel
@@ -22,6 +23,7 @@ class AddBookFragment : DialogFragment() {
 
     private var _binding: FragmentAddBookBinding? = null
     private val binding get() = _binding!!
+    private var addedBook = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,8 +95,14 @@ class AddBookFragment : DialogFragment() {
         )
 
         manageData.setData(tempData!!)
-
+        addedBook = true
         Toast.makeText(requireContext(), "Book added", Toast.LENGTH_SHORT).show()
         // TODO: Clear data from fields and go back to home fragment
+    }
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        if (addedBook){
+            NavHostFragment.findNavController(this).navigate(R.id.homeFragment)
+        }
     }
 }
