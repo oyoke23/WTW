@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pake.nsqlproject.R
 import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.data.PersonalList
 import com.pake.nsqlproject.databinding.FragmentBookListBinding
@@ -53,9 +55,37 @@ class BookListFragment(var personalList: PersonalList) : Fragment(), BookAdapter
         // Implement long press to delete
         Toast.makeText(context, "Long press to ${book.name}", Toast.LENGTH_SHORT).show()
 
-        // Remove book from list
-        personalList.books.remove(book)
-        // Update adapter
-        bookAdapter.notifyItemRemoved(position)
+        val popup = PopupMenu(context, binding.rvBookList)
+        popup.inflate(R.menu.popup_menu_books)
+        popup.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.edit_book -> {
+                    Toast.makeText(context, "Edit ${book.name}", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.remove_book -> {
+                    // Remove book from list
+                    personalList.books.remove(book)
+                    // Update adapter
+                    bookAdapter.notifyItemRemoved(position)
+                    Toast.makeText(context, "Delete ${book.name}", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        try {
+            val fieldMPopup = PopupMenu::class.java.getDeclaredField("mPopup")
+            fieldMPopup.isAccessible = true
+            val mPopup = fieldMPopup.get(popup)
+            mPopup.javaClass
+                .getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                .invoke(mPopup, true)
+        } catch (e: Exception) {
+            Log.e("Main", "Error showing menu icons.", e)
+        } finally {
+            popup.show()
+        }
     }
 }

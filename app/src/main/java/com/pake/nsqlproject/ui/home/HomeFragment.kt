@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.pake.nsqlproject.R
 import com.pake.nsqlproject.SharedViewModel
 import com.pake.nsqlproject.data.PersonalList
 import com.pake.nsqlproject.databinding.FragmentHomeBinding
@@ -57,13 +59,42 @@ class HomeFragment : Fragment() {
             // On long click on tab in tablayout delete the tab
             val tabs = binding.tabLayout.getChildAt(0) as ViewGroup
             for (i in 0 until tabs.childCount) {
-                tabs.getChildAt(i).setOnLongClickListener {
+                tabs.getChildAt(i).setOnLongClickListener { it ->
                     // get the position of the clicked tab
                     val position = tabs.indexOfChild(it)
-                    personalLists.removeAt(position)
-                    manageData.setData(allData)
-                    Toast.makeText(requireContext(), "Tab deleted ${position+1}", Toast.LENGTH_SHORT).show()
-                    viewPagerAdapter.notifyItemRemoved(position)
+
+                    val popup = PopupMenu(requireContext(), it)
+                    popup.setOnMenuItemClickListener {
+                        when (it.itemId) {
+                            R.id.change_name -> {
+                                Toast.makeText(requireContext(), "Tab name changed ${position+1}", Toast.LENGTH_SHORT).show()
+                                true
+                            }
+                            R.id.remove_list -> {
+                                personalLists.removeAt(position)
+                                manageData.setData(allData)
+                                Toast.makeText(requireContext(), "Tab deleted ${position+1}", Toast.LENGTH_SHORT).show()
+                                viewPagerAdapter.notifyItemRemoved(position)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                    popup.inflate(R.menu.popup_menu_lists)
+
+                    try {
+                        val fieldMPopup = PopupMenu::class.java.getDeclaredField("mPopup")
+                        fieldMPopup.isAccessible = true
+                        val mPopup = fieldMPopup.get(popup)
+                        mPopup.javaClass
+                            .getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                            .invoke(mPopup, true)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    } finally {
+                        popup.show()
+                    }
+
                     true
                 }
             }
