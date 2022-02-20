@@ -22,4 +22,7 @@
     <string name="add_book">Add Book</string>
     <string name="settings">Settings</string>
     <string name="add_list">Add  List</string>
+    <string name="change_name">Change name</string>
+    <string name="remove">Remove</string>
+    <string name="edit_book">Edit book</string>
 </resources>
