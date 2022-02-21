@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pake.nsqlproject.R
 import com.pake.nsqlproject.SharedViewModel
+import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.data.PersonalList
 import com.pake.nsqlproject.databinding.FragmentHomeBinding
 import com.pake.nsqlproject.model.ManageData
@@ -25,7 +26,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private var personalLists: MutableList<PersonalList> = mutableListOf()
     private lateinit var viewPagerAdapter: ViewPagerAdapter
-
+    private lateinit var searchView: SearchView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -100,5 +101,34 @@ class HomeFragment : Fragment() {
             }
 
         }
+        searchView = binding.searchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false;
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    filter(newText)
+                }
+                return true;
+            }
+        })
+    }
+    private fun filter(newText: String){
+        var filteredListBooks: MutableList<Book> = mutableListOf()
+        var filteredList: MutableList<PersonalList> = mutableListOf()
+
+        for(item in personalLists[0].books){
+            if (item.name.contains(newText)){
+                filteredPersonalList.books.add(item)
+            }
+        }
+
+        filteredPersonalList.add(filteredListBooks)
+        val viewPager = binding.vpBookList
+        viewPagerAdapter = ViewPagerAdapter(this,filteredList)
+        //ViewPagerAdapter.filterList(filteredList)
+        viewPager.adapter = viewPagerAdapter
     }
 }
