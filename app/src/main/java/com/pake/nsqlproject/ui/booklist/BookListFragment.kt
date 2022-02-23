@@ -14,6 +14,7 @@ import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.data.PersonalList
 import com.pake.nsqlproject.databinding.FragmentBookListBinding
 import com.pake.nsqlproject.model.BookAdapter
+import com.pake.nsqlproject.model.ManageData
 
 
 class BookListFragment(var personalList: PersonalList) : Fragment(), BookAdapter.OnItemClickListener {
@@ -64,11 +65,36 @@ class BookListFragment(var personalList: PersonalList) : Fragment(), BookAdapter
                     true
                 }
                 R.id.remove_book -> {
-                    // Remove book from list
-                    personalList.books.remove(book)
-                    // Update adapter
-                    bookAdapter.notifyItemRemoved(position)
-                    Toast.makeText(context, "Delete ${book.name}", Toast.LENGTH_SHORT).show()
+                    val manageData = ManageData(requireContext())
+                    val allData = manageData.getData()
+                    if (allData != null) {
+                        var positionList = 0
+                        for ((index, list) in allData.personalList.withIndex()) {
+                            if (list.id == personalList.id){
+                                positionList = index
+                            }
+                        }
+
+                        val booksIterable = allData.personalList[positionList].books.iterator()
+                        while (booksIterable.hasNext()) {
+                            var iterableBook = booksIterable.next()
+                            if (iterableBook.name == book.name) {
+                                allData.personalList[positionList].books.remove(book)
+                                break
+                            }
+                        }
+
+                        // Remove book from list
+                        personalList.books.remove(book)
+                        // Update adapter
+                        bookAdapter.notifyItemRemoved(position)
+
+                        manageData.setData(allData)
+
+
+                        Toast.makeText(context, "Delete ${book.name}", Toast.LENGTH_SHORT).show()
+
+                    }
                     true
                 }
                 else -> false
