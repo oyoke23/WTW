@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.11979166666666667" />
         <entry key="app/src/main/res/drawable-v24/ic_baseline_add_book_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23177083333333334" />
         <entry key="app/src/main/res/drawable/book_rounded_edge.xml" value="0.23177083333333334" />
@@ -26,6 +27,7 @@
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
         <entry key="app/src/main/res/menu/popup_menu_books.xml" value="0.5785123966942148" />
         <entry key="app/src/main/res/menu/popup_menu_lists.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/toolbar_search.xml" value="0.1046875" />
       </map>
     </option>
   </component>
