@@ -102,51 +102,61 @@ class HomeFragment : Fragment() {
 
             refreshLayout(personalLists, allData)
 
-            // On long click on tab in tablayout delete the tab
+            // On long click on tab in tabLayout
             val tabs = binding.tabLayout.getChildAt(0) as ViewGroup
-            for (i in 0 until tabs.childCount) {
-                tabs.getChildAt(i).setOnLongClickListener { it ->
-                    // get the position of the clicked tab
-                    val position = tabs.indexOfChild(it)
+                for (i in 0 until tabs.childCount) {
+                    tabs.getChildAt(i).setOnLongClickListener { it ->
+                        // get the position of the clicked tab
+                        if (!searchMode) {
+                            val position = tabs.indexOfChild(it)
 
-                    val popup = PopupMenu(requireContext(), it)
-                    popup.setOnMenuItemClickListener {
-                        when (it.itemId) {
-                            R.id.change_name -> {
-                                Toast.makeText(requireContext(), "Tab name changed ${position+1}", Toast.LENGTH_SHORT).show()
-                                true
+                            val popup = PopupMenu(requireContext(), it)
+                            popup.setOnMenuItemClickListener {
+                                when (it.itemId) {
+                                    R.id.change_name -> {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Tab name changed ${position + 1}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        true
+                                    }
+                                    R.id.remove_list -> {
+                                        personalLists.removeAt(position)
+                                        manageData.setData(allData)
+                                        //viewPagerAdapter.notifyItemRemoved(position)
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Tab deleted ${position + 1}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        refreshLayout(personalLists, allData)
+
+                                        false
+                                    }
+                                    else -> false
+                                }
                             }
-                            R.id.remove_list -> {
+                            popup.inflate(R.menu.popup_menu_lists)
 
-                                personalLists.removeAt(position)
-                                manageData.setData(allData)
-                                //viewPagerAdapter.notifyItemRemoved(position)
-                                Toast.makeText(requireContext(), "Tab deleted ${position+1}", Toast.LENGTH_SHORT).show()
-                                refreshLayout(personalLists, allData)
-
-                                false
+                            try {
+                                val fieldMPopup = PopupMenu::class.java.getDeclaredField("mPopup")
+                                fieldMPopup.isAccessible = true
+                                val mPopup = fieldMPopup.get(popup)
+                                mPopup.javaClass
+                                    .getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                                    .invoke(mPopup, true)
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            } finally {
+                                popup.show()
                             }
-                            else -> false
                         }
-                    }
-                    popup.inflate(R.menu.popup_menu_lists)
 
-                    try {
-                        val fieldMPopup = PopupMenu::class.java.getDeclaredField("mPopup")
-                        fieldMPopup.isAccessible = true
-                        val mPopup = fieldMPopup.get(popup)
-                        mPopup.javaClass
-                            .getDeclaredMethod("setForceShowIcon", Boolean::class.java)
-                            .invoke(mPopup, true)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    } finally {
-                        popup.show()
+                        true
                     }
-
-                    true
                 }
-            }
+
 
         }
 
