@@ -17,15 +17,13 @@ import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.databinding.FragmentEditBookBinding
 import com.pake.nsqlproject.model.ManageData
 
-class EditBookFragment(book: Book, listPosition: Int) : DialogFragment() {
+class EditBookFragment(private var book: Book, private var listPosition: Int) : DialogFragment() {
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private var _binding : FragmentEditBookBinding? = null
     private val binding get() = _binding!!
     private var editedBook: Boolean = false
-    private var book: Book = book
-    private var listPosition: Int = listPosition
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,7 +94,7 @@ class EditBookFragment(book: Book, listPosition: Int) : DialogFragment() {
 
     private fun handleEditBook() {
         val manageData = ManageData(requireContext())
-        var tempData = sharedViewModel.allData.value
+        val tempData = sharedViewModel.allData.value
         if (tempData != null) {
             tempData.personalList[listPosition].books.indexOf(book).let {
                 tempData.personalList[listPosition].books[it].readCh = binding.etReadChapter.text.toString()
