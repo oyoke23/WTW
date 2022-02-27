@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.editbook.EditBookFragment"
+    android:background="#014362">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="600dp"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EDIT MODE"
+            android:textColor="#ffffff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvBookTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title..."
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"/>
+
+        <Spinner
+            android:id="@+id/spStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:outlineAmbientShadowColor="@color/white"
+            android:entries="@array/status_types"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chapter"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Readed"
+                android:textColor="@color/white"
+                android:layout_marginRight="5dp"/>
+
+            <EditText
+                android:id="@+id/etReadChapter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="3"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:text="0"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:textColor="@color/white"
+                android:layout_marginRight="5dp"/>
+
+            <EditText
+                android:id="@+id/etTotalChapters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="3"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:text=""/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"/>
+
+        <EditText
+            android:id="@+id/etScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal|numberSigned"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/btnEditBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit book"
+            android:layout_marginTop="30dp"/>
+
+    </LinearLayout>
+
+</FrameLayout>

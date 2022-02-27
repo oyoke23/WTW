@@ -34,7 +34,7 @@
       "books": [
         {
           "name": "Libro3",
-          "status": "Reading",
+          "status": "Plan to read",
           "readCh": "18",
           "totalCh": "?",
           "score": "3.8"

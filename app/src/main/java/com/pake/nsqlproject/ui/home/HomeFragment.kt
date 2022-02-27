@@ -18,6 +18,7 @@ import com.pake.nsqlproject.data.PersonalList
 import com.pake.nsqlproject.databinding.FragmentHomeBinding
 import com.pake.nsqlproject.model.ManageData
 import com.pake.nsqlproject.model.ViewPagerAdapter
+import com.pake.nsqlproject.ui.editlist.EditListFragment
 
 class HomeFragment : Fragment() {
 
@@ -102,26 +103,34 @@ class HomeFragment : Fragment() {
 
             refreshLayout(personalLists, allData)
 
-            // On long click on tab in tablayout delete the tab
+            // On long click on tab in tabLayout
             val tabs = binding.tabLayout.getChildAt(0) as ViewGroup
             for (i in 0 until tabs.childCount) {
                 tabs.getChildAt(i).setOnLongClickListener { it ->
                     // get the position of the clicked tab
                     val position = tabs.indexOfChild(it)
-
                     val popup = PopupMenu(requireContext(), it)
-                    popup.setOnMenuItemClickListener {
-                        when (it.itemId) {
+
+                    popup.setOnMenuItemClickListener { itTab ->
+                        when (itTab.itemId) {
                             R.id.change_name -> {
-                                Toast.makeText(requireContext(), "Tab name changed ${position+1}", Toast.LENGTH_SHORT).show()
+                                val personalList = personalLists.find { it.name == binding.tabLayout.getTabAt(position)!!.text.toString() }
+                                val dialog = EditListFragment(personalList!!)
+                                dialog.show(childFragmentManager, "editList")
+
                                 true
                             }
                             R.id.remove_list -> {
-
-                                personalLists.removeAt(position)
+                                // get the personal list from the name of tab
+                                val personalList = personalLists.find { it.name == binding.tabLayout.getTabAt(position)!!.text.toString() }
+                                personalLists.remove(personalList)
                                 manageData.setData(allData)
                                 //viewPagerAdapter.notifyItemRemoved(position)
-                                Toast.makeText(requireContext(), "Tab deleted ${position+1}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    requireContext(),
+                                    "List ${binding.tabLayout.getTabAt(position)!!.text.toString()} deleted",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 refreshLayout(personalLists, allData)
 
                                 false
@@ -147,7 +156,6 @@ class HomeFragment : Fragment() {
                     true
                 }
             }
-
         }
 
 
