@@ -18,6 +18,7 @@ import com.pake.nsqlproject.data.PersonalList
 import com.pake.nsqlproject.databinding.FragmentHomeBinding
 import com.pake.nsqlproject.model.ManageData
 import com.pake.nsqlproject.model.ViewPagerAdapter
+import com.pake.nsqlproject.ui.editlist.EditListFragment
 
 class HomeFragment : Fragment() {
 
@@ -113,11 +114,10 @@ class HomeFragment : Fragment() {
                     popup.setOnMenuItemClickListener { itTab ->
                         when (itTab.itemId) {
                             R.id.change_name -> {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Tab name changed ${position + 1}",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                val personalList = personalLists.find { it.name == binding.tabLayout.getTabAt(position)!!.text.toString() }
+                                val dialog = EditListFragment(personalList!!)
+                                dialog.show(childFragmentManager, "editList")
+
                                 true
                             }
                             R.id.remove_list -> {
