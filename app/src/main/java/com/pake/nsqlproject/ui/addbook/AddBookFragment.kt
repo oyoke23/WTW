@@ -72,11 +72,11 @@ class AddBookFragment : DialogFragment() {
 
     private fun parseStatus(status: Int): String {
         return when (status) {
-            0 -> "Plan to Watch"
-            1 -> "Watching"
+            0 -> "Plan to read"
+            1 -> "Reading"
             2 -> "Completed"
             3 -> "On Hold"
-            5 -> "Dropped"
+            4 -> "Dropped"
             else -> "Unknown"
         }
     }
