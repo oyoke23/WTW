@@ -29,6 +29,9 @@ class HomeFragment : Fragment() {
     private lateinit var allData: AllData
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private var searchMode : Boolean = false
+    private val manageData : ManageData by lazy {
+        ManageData(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,6 +82,8 @@ class HomeFragment : Fragment() {
 
             override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
                 searchMode = false
+                allData = manageData.getData()!!
+                personalLists = allData.personalList
                 refreshLayout(personalLists, allData)
                 return true
             }
@@ -89,7 +94,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun homeMain() {
-        val manageData = ManageData(requireContext())
         allData = manageData.getData()!!
 
         if (allData != null) {
