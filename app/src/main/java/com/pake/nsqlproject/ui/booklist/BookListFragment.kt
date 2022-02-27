@@ -15,6 +15,7 @@ import com.pake.nsqlproject.data.PersonalList
 import com.pake.nsqlproject.databinding.FragmentBookListBinding
 import com.pake.nsqlproject.model.BookAdapter
 import com.pake.nsqlproject.model.ManageData
+import com.pake.nsqlproject.ui.editbook.EditBookFragment
 
 
 class BookListFragment(var personalList: PersonalList) : Fragment(), BookAdapter.OnItemClickListener {
@@ -52,7 +53,7 @@ class BookListFragment(var personalList: PersonalList) : Fragment(), BookAdapter
 
     override fun onItemLongClick(position: Int) {
         // get book from list
-        val book = personalList.books[position]
+        val (book, listPosition) = getTrueBookFromList(personalList.books[position])
         // Implement long press to delete
         Toast.makeText(context, "Long press to ${book.name}", Toast.LENGTH_SHORT).show()
 
@@ -61,40 +62,22 @@ class BookListFragment(var personalList: PersonalList) : Fragment(), BookAdapter
         popup.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.edit_book -> {
-                    Toast.makeText(context, "Edit ${book.name}", Toast.LENGTH_SHORT).show()
+                    var dialog = EditBookFragment(book, listPosition)
+                    dialog.show(parentFragmentManager,"editBook")
                     true
                 }
                 R.id.remove_book -> {
                     val manageData = ManageData(requireContext())
                     val allData = manageData.getData()
+                    // Remove book from list
                     if (allData != null) {
-                        var positionList = 0
-                        for ((index, list) in allData.personalList.withIndex()) {
-                            if (list.id == personalList.id){
-                                positionList = index
-                            }
-                        }
-
-                        val booksIterable = allData.personalList[positionList].books.iterator()
-                        while (booksIterable.hasNext()) {
-                            var iterableBook = booksIterable.next()
-                            if (iterableBook.name == book.name) {
-                                allData.personalList[positionList].books.remove(book)
-                                break
-                            }
-                        }
-
-                        // Remove book from list
-                        personalList.books.remove(book)
-                        // Update adapter
-                        bookAdapter.notifyItemRemoved(position)
-
-                        manageData.setData(allData)
-
-
-                        Toast.makeText(context, "Delete ${book.name}", Toast.LENGTH_SHORT).show()
-
+                        allData.personalList[listPosition].books.remove(book)
                     }
+                    personalList.books.remove(book)
+                    // Update adapter
+                    bookAdapter.notifyItemRemoved(position)
+                    manageData.setData(allData)
+                    Toast.makeText(context, "Delete ${book.name}", Toast.LENGTH_SHORT).show()
                     true
                 }
                 else -> false
@@ -113,5 +96,30 @@ class BookListFragment(var personalList: PersonalList) : Fragment(), BookAdapter
         } finally {
             popup.show()
         }
+    }
+
+    private fun getTrueBookFromList(book: Book): Pair<Book,Int> {
+        var output: Book? = null
+        var listPosition: Int = 0
+
+        val manageData = ManageData(requireContext())
+        val allData = manageData.getData()
+        if (allData != null) {
+            for ((index, list) in allData.personalList.withIndex()) {
+                if (list.id == personalList.id){
+                    listPosition = index
+                }
+            }
+
+            val booksIterable = allData.personalList[listPosition].books.iterator()
+            while (booksIterable.hasNext()) {
+                var iterableBook = booksIterable.next()
+                if (iterableBook.name == book.name) {
+                    output = book
+                    break
+                }
+            }
+        }
+        return Pair(output!!, listPosition)
     }
 }
