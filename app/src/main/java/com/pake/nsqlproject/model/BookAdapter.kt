@@ -48,7 +48,7 @@ class BookAdapter(private val bookList: List<Book>, private val clickListener: B
         override fun onLongClick(p0: View?): Boolean {
             val position = bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                clickListener.onItemLongClick(position)
+                clickListener.onItemLongClick(p0,position)
             }
             return true
         }
@@ -56,6 +56,6 @@ class BookAdapter(private val bookList: List<Book>, private val clickListener: B
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
-        fun onItemLongClick(position: Int)
+        fun onItemLongClick(view: View?,position: Int)
     }
 }
