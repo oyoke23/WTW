@@ -39,7 +39,11 @@ class AddListFragment : DialogFragment() {
         val manageData = ManageData(requireContext())
         var tempData = sharedViewModel.allData.value
 
-        tempData?.personalList?.add(PersonalList(sharedViewModel.allData.value?.personalList?.last()?.id + 1, "-1", binding.etListName.text.toString(), mutableListOf<Book>()))
+        if (sharedViewModel.allData.value?.personalList?.size == 0) {
+            tempData?.personalList?.add(PersonalList("1", "-1", binding.etListName.text.toString(), mutableListOf<Book>()))
+        } else {
+            tempData?.personalList?.add(PersonalList(sharedViewModel.allData.value?.personalList?.last()?.id + 1, "-1", binding.etListName.text.toString(), mutableListOf<Book>()))
+        }
 
         manageData.setData(tempData!!)
         addedList = true
