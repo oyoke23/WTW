@@ -50,13 +50,13 @@ class BookListFragment(var personalList: PersonalList) : Fragment(), BookAdapter
         Toast.makeText(context, "Click to ${book.name}", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onItemLongClick(position: Int) {
+    override fun onItemLongClick(view: View?, position: Int) {
         // get book from list
         val book = personalList.books[position]
         // Implement long press to delete
         Toast.makeText(context, "Long press to ${book.name}", Toast.LENGTH_SHORT).show()
 
-        val popup = PopupMenu(context, binding.rvBookList)
+        val popup = PopupMenu(context, view)
         popup.inflate(R.menu.popup_menu_books)
         popup.setOnMenuItemClickListener {
             when (it.itemId) {
