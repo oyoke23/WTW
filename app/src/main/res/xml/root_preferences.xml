@@ -2,20 +2,22 @@
 
     <PreferenceCategory app:title="Manage data">
         <!--  Import/Export section  -->
-            <PreferenceScreen
+            <Preference
+                app:key="import_data"
                 app:title="Import"
-                app:fragment="com.android.settings.importexport.ImportExportSettings">
-            </PreferenceScreen>
-            <PreferenceScreen
+                app:summary="Import data from a backup file">
+            </Preference>
+            <Preference
+                app:key="export_data"
                 app:title="Export"
-                app:fragment="com.android.settings.importexport.ExportSettings">
-            </PreferenceScreen>
+                app:summary="Export data to a backup file">
+            </Preference>
     </PreferenceCategory>
 
     <PreferenceCategory app:title="More info">
 
         <PreferenceScreen
-            app:title="About"
+            app:title="About us"
             app:fragment="com.android.settings.about.AboutSettings">
         </PreferenceScreen>
 
