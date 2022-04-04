@@ -17,4 +17,10 @@
         <item>On hold</item>
         <item>Dropped</item>
     </string-array>
+
+    <string-array name="import_options">
+        <item>It&quot;s mine</item>
+        <item>It&quot;s from my friend</item>
+    </string-array>
+
 </resources>
