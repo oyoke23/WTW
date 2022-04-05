@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -38,8 +39,16 @@ class MainActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.homeMenuItem -> {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
-                    supportActionBar?.title = "Home"
+                    if (findNavController(R.id.nav_host_fragment).currentDestination?.id == R.id.homeFragment) {
+                        drawerLayout.closeDrawer(navigationView)
+                    } else {
+                        findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
+                        supportActionBar?.title = "Home"
+                    }
+                }
+                R.id.compareListsMenuItem -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.compareListsFragment)
+                    supportActionBar?.title = "Compare Lists"
                 }
                 R.id.addBookMenuItem -> {
                     var dialog = AddBookFragment()
@@ -52,10 +61,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.settingsMenuItem -> {
                     findNavController(R.id.nav_host_fragment).navigate(R.id.settingsFragment)
                     supportActionBar?.title = "Settings"
-                }
-                R.id.compareListsMenuItem -> {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.compareListsFragment)
-                    supportActionBar?.title = "Compare Lists"
                 }
             }
             drawerLayout.closeDrawers()
