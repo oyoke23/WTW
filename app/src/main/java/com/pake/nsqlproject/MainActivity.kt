@@ -37,21 +37,25 @@ class MainActivity : AppCompatActivity() {
         val navigationView: NavigationView = binding.navView
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.homeFragment -> {
+                R.id.homeMenuItem -> {
                     findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
                     supportActionBar?.title = "Home"
                 }
-                R.id.addBookFragment -> {
+                R.id.addBookMenuItem -> {
                     var dialog = AddBookFragment()
                     dialog.show(supportFragmentManager,"addBook")
                 }
-                R.id.addListFragment -> {
+                R.id.addListMenuItem -> {
                     var dialog = AddListFragment()
                     dialog.show(supportFragmentManager,"addList")
                 }
-                R.id.settingsFragment -> {
+                R.id.settingsMenuItem -> {
                     findNavController(R.id.nav_host_fragment).navigate(R.id.settingsFragment)
                     supportActionBar?.title = "Settings"
+                }
+                R.id.compareListsMenuItem -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.compareListsFragment)
+                    supportActionBar?.title = "Compare Lists"
                 }
             }
             drawerLayout.closeDrawers()

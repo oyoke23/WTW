@@ -25,4 +25,5 @@
     <string name="change_name">Change name</string>
     <string name="remove">Remove</string>
     <string name="edit_book">Edit book</string>
+    <string name="compareLists">Compare lists</string>
 </resources>

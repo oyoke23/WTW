@@ -15,6 +15,18 @@
         <action
             android:id="@+id/action_homeFragment_to_addBookFragment"
             app:destination="@id/addBookFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addListFragment2"
+            app:destination="@id/addListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_compareListsFragment2"
+            app:destination="@id/compareListsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_editBookFragment"
+            app:destination="@id/editBookFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_editListFragment2"
+            app:destination="@id/editListFragment2" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -34,9 +46,40 @@
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addListFragment2"
+        android:id="@+id/addListFragment"
         android:name="com.pake.nsqlproject.ui.addlist.AddListFragment"
         android:label="fragment_add_list"
-        tools:layout="@layout/fragment_add_list" />
+        tools:layout="@layout/fragment_add_list" >
+        <action
+            android:id="@+id/action_addListFragment2_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/compareListsFragment"
+        android:name="com.pake.nsqlproject.ui.compareLists.CompareListsFragment"
+        android:label="fragment_compare_lists"
+        tools:layout="@layout/fragment_compare_lists" >
+        <action
+            android:id="@+id/action_compareListsFragment2_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editBookFragment"
+        android:name="com.pake.nsqlproject.ui.editbook.EditBookFragment"
+        android:label="fragment_edit_book"
+        tools:layout="@layout/fragment_edit_book" >
+        <action
+            android:id="@+id/action_editBookFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editListFragment2"
+        android:name="com.pake.nsqlproject.ui.editlist.EditListFragment"
+        android:label="fragment_edit_list"
+        tools:layout="@layout/fragment_edit_list" >
+        <action
+            android:id="@+id/action_editListFragment2_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
 </navigation>
