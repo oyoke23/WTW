@@ -59,6 +59,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         1 -> {
                             Toast.makeText(context, "It's from my friend", Toast.LENGTH_SHORT).show()
                             fromOption = 1
+                            getFileFromUser()
                         }
                     }
                 }
@@ -126,12 +127,28 @@ class SettingsFragment : PreferenceFragmentCompat() {
                            val jsonObject = Json.decodeFromString(AllData.serializer(), stringBuilder.toString())
 
                            // Add the lists
-                           jsonObject.personalList.forEach {
-                               tempData.personalList.add(PersonalList(
-                                   tempData.personalList.last().id.toInt().plus(1).toString(),
-                                   "-1", it.name, it.books))
-                           }
+                           jsonObject.personalList.forEach { list ->
+                               // get the count of the list with the same name or name(number)
+                               val count = tempData.personalList.count { it1 -> it1.name == list.name ||
+                                       it1.name == list.name + "(" + tempData.personalList.count { it.name == list.name } + ")" }
 
+                               if (tempData.personalList.isEmpty()) {
+                                   tempData.personalList.add(
+                                       PersonalList(
+                                           "1", "-1", if (count == 0) list.name else list.name+("($count)"), list.books
+                                       )
+                                   )
+                               } else {
+                                   tempData.personalList.add(
+                                       PersonalList(
+                                           tempData.personalList.last().id.toInt().plus(1)
+                                               .toString(),
+                                           "-1",  if (count == 0) list.name else list.name+("($count)"), list.books
+                                       )
+                                   )
+                               }
+
+                           }
                            //set new data
                            manageData.setData(tempData)
                        }
@@ -141,7 +158,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
                            var userId: String? = null;
                            // Check if the user is in the friend list
-                           if (tempData.friendList.size == 0) {
+                           if (tempData.friendList.isEmpty()) {
                                // Add the user to the friend list
                                tempData.friendList.add(Friend(
                                    "1",
