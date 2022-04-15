@@ -1,4 +1,4 @@
-package com.pake.nsqlproject.ui.compareLists
+package com.pake.nsqlproject.ui.comparebooklist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.pake.nsqlproject.R
 import com.pake.nsqlproject.databinding.FragmentCompareListsBinding
+import com.pake.nsqlproject.model.CompareBookAdapter
 
-class CompareListsFragment : Fragment() {
+
+class CompareBookListFragment : Fragment(), CompareBookAdapter.OnItemClickListener {
 
     private var _binding: FragmentCompareListsBinding? = null
     private val binding get() = _binding!!
@@ -22,12 +24,13 @@ class CompareListsFragment : Fragment() {
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onItemClick(position: Int) {
+        TODO("Not yet implemented")
     }
 
-
+    override fun onItemLongClick(view: View?, position: Int) {
+        TODO("Not yet implemented")
+    }
 
 
 }

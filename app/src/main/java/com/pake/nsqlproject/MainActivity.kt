@@ -14,6 +14,7 @@ import com.google.android.material.navigation.NavigationView
 import com.pake.nsqlproject.databinding.ActivityMainBinding
 import com.pake.nsqlproject.ui.addbook.AddBookFragment
 import com.pake.nsqlproject.ui.addlist.AddListFragment
+import com.pake.nsqlproject.ui.comparelists.CompareListsFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -47,8 +48,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 R.id.compareListsMenuItem -> {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.compareListsFragment)
-                    supportActionBar?.title = "Compare Lists"
+                    var dialog = CompareListsFragment()
+                    dialog.show(supportFragmentManager, "compareLists")
                 }
                 R.id.addBookMenuItem -> {
                     var dialog = AddBookFragment()

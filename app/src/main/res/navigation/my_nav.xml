@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/compareListsFragment"
-        android:name="com.pake.nsqlproject.ui.compareLists.CompareListsFragment"
+        android:name="com.pake.nsqlproject.ui.comparelists.CompareListsFragment"
         android:label="fragment_compare_lists"
         tools:layout="@layout/fragment_compare_lists" >
         <action
