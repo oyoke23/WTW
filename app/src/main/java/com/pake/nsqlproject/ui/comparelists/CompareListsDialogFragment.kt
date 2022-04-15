@@ -2,20 +2,20 @@ package com.pake.nsqlproject.ui.comparelists
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.pake.nsqlproject.R
 import com.pake.nsqlproject.SharedViewModel
-import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.data.CompareBook
 import com.pake.nsqlproject.databinding.FragmentCompareListsBinding
 
-class CompareListsFragment : DialogFragment() {
+class CompareListsDialogFragment : DialogFragment() {
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private var _binding: FragmentCompareListsBinding? = null
@@ -30,6 +30,8 @@ class CompareListsFragment : DialogFragment() {
         main()
         binding.btnCompareList.setOnClickListener {
             compareData()
+            findNavController().navigate(R.id.compareBookListFragment)
+            dismiss()
         }
         return binding.root
     }

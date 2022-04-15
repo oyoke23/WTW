@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -14,7 +13,7 @@ import com.google.android.material.navigation.NavigationView
 import com.pake.nsqlproject.databinding.ActivityMainBinding
 import com.pake.nsqlproject.ui.addbook.AddBookFragment
 import com.pake.nsqlproject.ui.addlist.AddListFragment
-import com.pake.nsqlproject.ui.comparelists.CompareListsFragment
+import com.pake.nsqlproject.ui.comparelists.CompareListsDialogFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 R.id.compareListsMenuItem -> {
-                    var dialog = CompareListsFragment()
+                    var dialog = CompareListsDialogFragment()
                     dialog.show(supportFragmentManager, "compareLists")
                 }
                 R.id.addBookMenuItem -> {

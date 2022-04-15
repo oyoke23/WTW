@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pake.nsqlproject.R
+import com.pake.nsqlproject.databinding.FragmentCompareBookListBinding
 import com.pake.nsqlproject.databinding.FragmentCompareListsBinding
 import com.pake.nsqlproject.model.CompareBookAdapter
 
 
 class CompareBookListFragment : Fragment(), CompareBookAdapter.OnItemClickListener {
 
-    private var _binding: FragmentCompareListsBinding? = null
+    private var _binding: FragmentCompareBookListBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -20,7 +21,7 @@ class CompareBookListFragment : Fragment(), CompareBookAdapter.OnItemClickListen
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentCompareListsBinding.inflate(inflater, container, false)
+        _binding = FragmentCompareBookListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
