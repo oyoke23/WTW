@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import com.pake.nsqlproject.R
 import com.pake.nsqlproject.SharedViewModel
 import com.pake.nsqlproject.data.Book
+import com.pake.nsqlproject.data.CompareBook
 import com.pake.nsqlproject.databinding.FragmentCompareListsBinding
 
 class CompareListsFragment : DialogFragment() {
@@ -62,23 +63,26 @@ class CompareListsFragment : DialogFragment() {
         val data2 = sharedViewModel.allData.value?.personalList?.find { it.name == list2 }
         val data1List = data1?.books
         val data2List = data2?.books
-        val diffList = ArrayList<Book>()
+        val diffList = ArrayList<CompareBook>()
 
-        /*data1List?.forEach { book ->
-            if (!diffList.contains(book)) {
-                diffList.add(book)
+        data1List?.forEach { book ->
+            if (!diffList.any { it.book_1?.name == book.name }) {
+                diffList.add(CompareBook(book, null))
             }
         }
 
         data2List?.forEach { book ->
-            if (!diffList.contains(book)) {
-                diffList.add(book)
+            if (!diffList.any { it.book_1?.name == book.name || it.book_2?.name == book.name }) {
+                diffList.add(CompareBook(null, book))
             } else {
-                var tempBook = diffList.find { book.name == it.name }
+                diffList.find { it.book_1?.name == book.name || it.book_2?.name == book.name }?.let {
+                    it.book_2 = book
+                }
             }
-        }*/
+        }
 
         Log.i("DiffList", diffList.toString())
+        sharedViewModel.saveCompareBookList(diffList)
     }
 
     override fun onDestroyView() {
