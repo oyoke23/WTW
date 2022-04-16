@@ -26,4 +26,6 @@
     <string name="remove">Remove</string>
     <string name="edit_book">Edit book</string>
     <string name="compareLists">Compare lists</string>
+    <string name="book_cover">Book cover</string>
+    <string name="ch_separator">/</string>
 </resources>

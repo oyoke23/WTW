@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:layout_margin="15dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginHorizontal="15dp"
     android:background="@drawable/book_rounded_edge"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -12,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.20" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glVertical1"
@@ -33,9 +34,8 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/tvTitle"
-        android:text="TEST"
         android:background="@drawable/compare_book_title"
-        android:paddingTop="5dp"
+        android:padding="1dp"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -45,8 +45,8 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="90dp"
-        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:layout_height="110dp"
         android:orientation="vertical"
         android:background="@drawable/compare_book_user"
         app:layout_constraintTop_toBottomOf="@id/glHeader"
@@ -63,7 +63,7 @@
 
         <TextView
             android:layout_width="40dp"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:id="@+id/tvUserScore1"
             android:gravity="center"
             android:textColor="@color/white"
@@ -77,7 +77,7 @@
 
         <TextView
             android:id="@+id/tvUserStatus1"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:background="@drawable/status_book"
             android:gravity="center"
@@ -90,7 +90,7 @@
             app:layout_constraintVertical_bias="0"/>
 
         <LinearLayout
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@drawable/chapters_book"
@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="/"
+                android:text="@string/ch_separator"
                 android:paddingHorizontal="5dp"/>
 
             <TextView
@@ -127,7 +127,9 @@
     <ImageView
         android:layout_width="69dp"
         android:layout_height="86dp"
+        android:id="@+id/imgBook"
         android:background="@drawable/book_rounded_edge"
+        android:contentDescription="@string/book_cover"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/glVertical1"
         app:layout_constraintRight_toLeftOf="@id/glVertical2"
@@ -135,8 +137,8 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="90dp"
-        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:layout_height="110dp"
         android:orientation="vertical"
         android:background="@drawable/compare_book_user"
         app:layout_constraintTop_toBottomOf="@id/glHeader"
@@ -153,7 +155,7 @@
 
         <TextView
             android:layout_width="40dp"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:id="@+id/tvUserScore2"
             android:gravity="center"
             android:textColor="@color/white"
@@ -167,7 +169,7 @@
 
         <TextView
             android:id="@+id/tvUserStatus2"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:background="@drawable/status_book"
             android:gravity="center"
@@ -180,7 +182,7 @@
             app:layout_constraintVertical_bias="0"/>
 
         <LinearLayout
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@drawable/chapters_book"
@@ -201,7 +203,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="/"
+                android:text="@string/ch_separator"
                 android:paddingHorizontal="5dp"/>
 
             <TextView

@@ -5,9 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pake.nsqlproject.R
-import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.data.CompareBook
-import com.pake.nsqlproject.databinding.ItemBookBinding
 import com.pake.nsqlproject.databinding.ItemCompareBookBinding
 import com.pake.nsqlproject.ui.comparebooklist.CompareBookListFragment
 
@@ -15,7 +13,7 @@ class CompareBookAdapter(private val bookList: List<CompareBook>, private val cl
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return BookHolder(layoutInflater.inflate(R.layout.item_book, parent,false))
+        return BookHolder(layoutInflater.inflate(R.layout.item_compare_book, parent,false))
     }
 
     override fun onBindViewHolder(holder: BookHolder, position: Int) {
@@ -28,9 +26,9 @@ class CompareBookAdapter(private val bookList: List<CompareBook>, private val cl
         private val binding = ItemCompareBookBinding.bind(view)
 
         fun render(compareBook: CompareBook) {
-            binding.tvTitle.text = compareBook.book_1?.name
 
             if (compareBook.book_1 != null) {
+                binding.tvTitle.text = compareBook.book_1?.name
                 binding.tvUserScore1.text = compareBook.book_1?.score.toString()
                 binding.tvUserStatus1.text = compareBook.book_1?.status
                 binding.tvUserReadCh1.text = compareBook.book_1?.readCh.toString()
@@ -43,6 +41,7 @@ class CompareBookAdapter(private val bookList: List<CompareBook>, private val cl
             }
 
             if (compareBook.book_2 != null) {
+                binding.tvTitle.text = compareBook.book_2?.name
                 binding.tvUserScore2.text = compareBook.book_2?.score.toString()
                 binding.tvUserStatus2.text = compareBook.book_2?.status
                 binding.tvUserReadCh2.text = compareBook.book_2?.readCh.toString()
