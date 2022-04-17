@@ -42,7 +42,8 @@ class AddListFragment : DialogFragment() {
         if (sharedViewModel.allData.value?.personalList?.size == 0) {
             tempData?.personalList?.add(PersonalList("1", "-1", binding.etListName.text.toString(), mutableListOf<Book>()))
         } else {
-            tempData?.personalList?.add(PersonalList(sharedViewModel.allData.value?.personalList?.last()?.id + 1, "-1", binding.etListName.text.toString(), mutableListOf<Book>()))
+            tempData?.personalList?.add(PersonalList(tempData.personalList.last().id.toInt().plus(1)
+                .toString(), "-1", binding.etListName.text.toString(), mutableListOf<Book>()))
         }
 
         manageData.setData(tempData!!)
