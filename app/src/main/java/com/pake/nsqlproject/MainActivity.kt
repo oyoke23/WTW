@@ -13,6 +13,7 @@ import com.google.android.material.navigation.NavigationView
 import com.pake.nsqlproject.databinding.ActivityMainBinding
 import com.pake.nsqlproject.ui.addbook.AddBookFragment
 import com.pake.nsqlproject.ui.addlist.AddListFragment
+import com.pake.nsqlproject.ui.comparelists.CompareListsDialogFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,19 +38,27 @@ class MainActivity : AppCompatActivity() {
         val navigationView: NavigationView = binding.navView
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.homeFragment -> {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
-                    supportActionBar?.title = "Home"
+                R.id.homeMenuItem -> {
+                    if (findNavController(R.id.nav_host_fragment).currentDestination?.id == R.id.homeFragment) {
+                        drawerLayout.closeDrawer(navigationView)
+                    } else {
+                        findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
+                        supportActionBar?.title = "Home"
+                    }
                 }
-                R.id.addBookFragment -> {
+                R.id.compareListsMenuItem -> {
+                    var dialog = CompareListsDialogFragment()
+                    dialog.show(supportFragmentManager, "compareLists")
+                }
+                R.id.addBookMenuItem -> {
                     var dialog = AddBookFragment()
                     dialog.show(supportFragmentManager,"addBook")
                 }
-                R.id.addListFragment -> {
+                R.id.addListMenuItem -> {
                     var dialog = AddListFragment()
                     dialog.show(supportFragmentManager,"addList")
                 }
-                R.id.settingsFragment -> {
+                R.id.settingsMenuItem -> {
                     findNavController(R.id.nav_host_fragment).navigate(R.id.settingsFragment)
                     supportActionBar?.title = "Settings"
                 }
