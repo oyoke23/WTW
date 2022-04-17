@@ -26,7 +26,7 @@ class CompareBookListFragment : Fragment(), CompareBookAdapter.OnItemClickListen
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentCompareBookListBinding.inflate(inflater, container, false)
         initRecycler(sharedViewModel.compareBookList.value!!)
@@ -44,12 +44,10 @@ class CompareBookListFragment : Fragment(), CompareBookAdapter.OnItemClickListen
     }
 
     override fun onItemClick(position: Int) {
-        TODO("Not yet implemented")
         Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
     }
 
     override fun onItemLongClick(view: View?, position: Int) {
-        TODO("Not yet implemented")
         Toast.makeText(context, "Long Clicked", Toast.LENGTH_SHORT).show()
     }
 
