@@ -84,7 +84,7 @@ class CompareListsDialogFragment : DialogFragment() {
         }
 
         Log.i("DiffList", diffList.toString())
-        sharedViewModel.saveCompareBookList(diffList)
+        sharedViewModel.saveCompareBookList(list1, list2, diffList)
     }
 
     override fun onDestroyView() {

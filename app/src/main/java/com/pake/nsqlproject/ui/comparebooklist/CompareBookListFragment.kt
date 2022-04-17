@@ -37,6 +37,8 @@ class CompareBookListFragment : Fragment(), CompareBookAdapter.OnItemClickListen
         Log.i("Init recycler", "initRecycler")
         binding.rvCompareBookList.layoutManager = LinearLayoutManager(context)
         compareBookAdapter = CompareBookAdapter(compareBookList,this)
+        binding.tvList1.text = sharedViewModel.listName1.value
+        binding.tvList2.text = sharedViewModel.listName2.value
 
         binding.rvCompareBookList.adapter = compareBookAdapter
     }
