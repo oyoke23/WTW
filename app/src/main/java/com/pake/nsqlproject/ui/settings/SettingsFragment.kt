@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.activityViewModels
 import androidx.preference.Preference
@@ -37,9 +38,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Settings"
         main()
     }
-
 
     var fromOption: Int? = null;
 

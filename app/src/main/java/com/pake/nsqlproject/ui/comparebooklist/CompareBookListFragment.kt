@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +34,8 @@ class CompareBookListFragment : Fragment(), CompareBookAdapter.OnItemClickListen
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentCompareBookListBinding.inflate(inflater, container, false)
+        // change action bar title to compare book list
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Compare Book List"
         compareBookList = sharedViewModel.compareBookList.value!!
         setHasOptionsMenu(true)
         initRecycler()

@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Home"
 
         val navigationView: NavigationView = binding.navView
         navigationView.setNavigationItemSelectedListener {
@@ -43,24 +42,23 @@ class MainActivity : AppCompatActivity() {
                         drawerLayout.closeDrawer(navigationView)
                     } else {
                         findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
-                        supportActionBar?.title = "Home"
                     }
                 }
                 R.id.compareListsMenuItem -> {
-                    var dialog = CompareListsDialogFragment()
-                    dialog.show(supportFragmentManager, "compareLists")
+                    CompareListsDialogFragment().show(supportFragmentManager, "compareLists")
                 }
                 R.id.addBookMenuItem -> {
-                    var dialog = AddBookFragment()
-                    dialog.show(supportFragmentManager,"addBook")
+                    AddBookFragment().show(supportFragmentManager,"addBook")
                 }
                 R.id.addListMenuItem -> {
-                    var dialog = AddListFragment()
-                    dialog.show(supportFragmentManager,"addList")
+                    AddListFragment().show(supportFragmentManager,"addList")
                 }
                 R.id.settingsMenuItem -> {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.settingsFragment)
-                    supportActionBar?.title = "Settings"
+                    if (findNavController(R.id.nav_host_fragment).currentDestination?.id == R.id.settingsFragment) {
+                        drawerLayout.closeDrawer(navigationView)
+                    } else {
+                        findNavController(R.id.nav_host_fragment).navigate(R.id.settingsFragment)
+                    }
                 }
             }
             drawerLayout.closeDrawers()
