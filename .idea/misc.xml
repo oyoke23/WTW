@@ -13,6 +13,7 @@
         <entry key="app/src/main/res/drawable/score_book.xml" value="0.23177083333333334" />
         <entry key="app/src/main/res/drawable/select_list.xml" value="0.3305" />
         <entry key="app/src/main/res/drawable/status_book.xml" value="0.23177083333333334" />
+        <entry key="app/src/main/res/drawable/tab_indicator.xml" value="0.229" />
         <entry key="app/src/main/res/drawable/title_book.xml" value="0.23177083333333334" />
         <entry key="app/src/main/res/layout-v28/fragment_compare_lists.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.215625" />
@@ -27,7 +28,7 @@
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/fragment_edit_book.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_edit_list.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18" />
         <entry key="app/src/main/res/layout/item_book.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_compare_book.xml" value="0.75" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.215625" />
