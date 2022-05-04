@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group>
-        <item android:id="@+id/homeMenuItem"
-            android:icon="@drawable/ic_baseline_home_24"
-            android:title="@string/home"/>
-        <item android:id="@+id/compareListsMenuItem"
-            android:icon="@drawable/ic_baseline_add_book_24"
-            android:title="@string/compareLists"/>
-    </group>
+    <item  android:title="WhatToWatch">
+        <menu>
+            <item android:id="@+id/homeMenuItem"
+                android:icon="@drawable/ic_baseline_home_24"
+                android:title="@string/home"/>
+            <item android:id="@+id/compareListsMenuItem"
+                android:icon="@drawable/ic_baseline_add_book_24"
+                android:title="@string/compareLists"/>
+        </menu>
 
-    <group>
-        <item
-            android:id="@+id/addBookMenuItem"
-            android:icon="@drawable/ic_baseline_add_book_24"
-            android:title="@string/add_book" />
-        <item
-            android:id="@+id/addListMenuItem"
-            android:icon="@drawable/ic_baseline_add_list_24"
-            android:title="@string/add_list" />
-    </group>
+    </item>
 
-    <group>
-        <item android:id="@+id/settingsMenuItem"
-            android:icon="@drawable/ic_baseline_settings_24"
-            android:title="@string/settings"/>
-    </group>
+    <item android:title="Add">
+        <menu>
+            <item
+                android:id="@+id/addBookMenuItem"
+                android:icon="@drawable/ic_baseline_add_book_24"
+                android:title="@string/add_book" />
+            <item
+                android:id="@+id/addListMenuItem"
+                android:icon="@drawable/ic_baseline_add_list_24"
+                android:title="@string/add_list" />
+        </menu>
+
+    </item>
+
+    <item android:title="Options">
+        <menu>
+            <item android:id="@+id/settingsMenuItem"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:title="@string/settings"/>
+        </menu>
+    </item>
 </menu>
