@@ -8,6 +8,7 @@ import com.pake.nsqlproject.R
 import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.databinding.ItemBookBinding
 import com.pake.nsqlproject.ui.booklist.BookListFragment
+import com.squareup.picasso.Picasso
 
 class BookAdapter(private val bookList: List<Book>, private val clickListener: BookListFragment): RecyclerView.Adapter<BookAdapter.BookHolder>() {
 
@@ -27,9 +28,10 @@ class BookAdapter(private val bookList: List<Book>, private val clickListener: B
 
         fun render(book: Book) {
             binding.tvTitle.text = book.name
+            Picasso.get().load(book.image).into(binding.ivBook)
             binding.tvStatus.text = book.status
-            binding.tvReadCh.text = book.readCh
-            binding.tvTotalCh.text = book.totalCh
+            binding.tvReadCh.text = book.readCh.toString()
+            binding.tvTotalCh.text = book.totalCh.toString()
             binding.tvScore.text = book.score
         }
 

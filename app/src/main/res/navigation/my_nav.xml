@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_homeFragment_to_compareBookListFragment22"
             app:destination="@id/compareBookListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchBookFragment"
+            app:destination="@id/searchBookFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -93,5 +96,10 @@
             android:id="@+id/action_compareBookListFragment2_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/searchBookFragment"
+        android:name="com.pake.nsqlproject.ui.searchbook.SearchBookFragment"
+        android:label="fragment_search_book"
+        tools:layout="@layout/fragment_search_book" />
 
 </navigation>
