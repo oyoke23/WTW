@@ -97,8 +97,8 @@ class EditBookFragment(private var book: Book, private var listPosition: Int) : 
         val tempData = sharedViewModel.allData.value
         if (tempData != null) {
             tempData.personalList[listPosition].books.indexOf(book).let {
-                tempData.personalList[listPosition].books[it].readCh = binding.etReadChapter.text.toString()
-                tempData.personalList[listPosition].books[it].totalCh = binding.etTotalChapters.text.toString()
+                tempData.personalList[listPosition].books[it].readCh = binding.etReadChapter.text.toString().toInt()
+                tempData.personalList[listPosition].books[it].totalCh = binding.etTotalChapters.text.toString().toInt()
                 tempData.personalList[listPosition].books[it].score = binding.etScore.text.toString()
                 tempData.personalList[listPosition].books[it].status = parseStatusOutput(binding.spStatus.selectedItemPosition)
                 manageData.setData(tempData)

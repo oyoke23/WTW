@@ -1,5 +1,6 @@
 package com.pake.nsqlproject.ui.searchbook
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,27 +9,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.pake.nsqlproject.R
-import com.pake.nsqlproject.data.AllData
-import com.pake.nsqlproject.data.Book
+import com.pake.nsqlproject.SharedViewModel
 import com.pake.nsqlproject.data.JikanItem
-import com.pake.nsqlproject.data.PersonalList
 import com.pake.nsqlproject.data.jikan.JikanAllData
 import com.pake.nsqlproject.data.jikan.JikanWithoutMeta
-import com.pake.nsqlproject.databinding.FragmentBookListBinding
 import com.pake.nsqlproject.databinding.FragmentSearchBookBinding
-import com.pake.nsqlproject.model.BookAdapter
 import com.pake.nsqlproject.model.JikanAdapter
+import com.pake.nsqlproject.ui.addbook.AddBookFragment
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import org.json.JSONArray
 
 class SearchBookFragment : Fragment() {
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private var _binding : FragmentSearchBookBinding? = null
     private val binding get() = _binding!!
@@ -76,9 +73,16 @@ class SearchBookFragment : Fragment() {
                         val id = it.mal_id
                         val title = it.title
                         val image = it.images?.jpg?.image_url
-                        val chapters = it.chapters
-                        val synopsis = it.synopsis
+                        var chapters = it.chapters
+                        var synopsis = it.synopsis
                         val members = it.members
+
+                        if (chapters == null){
+                            chapters = -1
+                        }
+                        if (synopsis == null){
+                            synopsis = "??"
+                        }
                         if (id != null && title != null && image != null){
                             jikanItem = JikanItem(id, title, image, chapters, synopsis,members)
                             itemsList.add(jikanItem)
@@ -91,14 +95,19 @@ class SearchBookFragment : Fragment() {
                         val id = it.mal_id
                         val title = it.title
                         val image = it.images?.jpg?.image_url
-                        val chapters = it.chapters
-                        val synopsis = it.synopsis
+                        var chapters = it.chapters
+                        var synopsis = it.synopsis
                         val members = it.members
-                        if (id != null && title != null && image != null){
-                            jikanItem = JikanItem(id, title, image, chapters, synopsis,members)
-                            itemsList.add(jikanItem)
 
+                        if (chapters == null){
+                            chapters = -1
                         }
+                        if (synopsis == null){
+                            synopsis = "??"
+                        }
+                        jikanItem = JikanItem(id!!, title!!, image!!, chapters!!, synopsis!!,members)
+                        itemsList.add(jikanItem)
+
                         Log.i("JIKAN WITHOUT META ITEM:", itemsList.toString())
 
                     }
@@ -113,16 +122,20 @@ class SearchBookFragment : Fragment() {
     }
 
     private fun initRecycler() {
-        binding.rvJikanItems.layoutManager = GridLayoutManager(this.context, 2)
+        val recyclerView = binding.rvJikanItems
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
+
         itemsList.sortByDescending { it.members }
         val sortedItemsList = itemsList.toSet().toList()
+
         jikanAdapter = JikanAdapter(sortedItemsList,this)
-        binding.rvJikanItems.adapter = jikanAdapter
+        recyclerView.adapter = jikanAdapter
     }
 
     fun onItemClick(position: Int) {
         val item = itemsList[position]
-        Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
+        sharedViewModel.saveJikanItem(item)
+        AddBookFragment().show(childFragmentManager, "AddBookFragment")
     }
 
     fun onItemLongClick(p0: View?, position: Int) {

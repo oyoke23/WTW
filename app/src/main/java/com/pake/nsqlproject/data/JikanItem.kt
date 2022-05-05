@@ -7,7 +7,7 @@ data class JikanItem (
     val mal_id: Int,
     val title: String,
     val image: String,
-    val chapters: Int?,
-    val synopsis: String?,
+    val chapters: Int,
+    val synopsis: String,
     val members: Int?
 )
