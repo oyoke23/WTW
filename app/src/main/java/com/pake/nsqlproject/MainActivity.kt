@@ -48,7 +48,9 @@ class MainActivity : AppCompatActivity() {
                     CompareListsDialogFragment().show(supportFragmentManager, "compareLists")
                 }
                 R.id.addBookMenuItem -> {
-                    AddBookFragment().show(supportFragmentManager,"addBook")
+                    //abre el fragmento SearchBookFragment
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.searchBookFragment)
+                    //AddBookFragment().show(supportFragmentManager,"addBook")
                 }
                 R.id.addListMenuItem -> {
                     AddListFragment().show(supportFragmentManager,"addList")
