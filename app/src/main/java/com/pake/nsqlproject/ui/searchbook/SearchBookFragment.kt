@@ -1,6 +1,5 @@
 package com.pake.nsqlproject.ui.searchbook
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,23 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.pake.nsqlproject.SharedViewModel
-import com.pake.nsqlproject.data.JikanItem
+import com.pake.nsqlproject.data.ApiItem
 import com.pake.nsqlproject.data.jikan.JikanAllData
 import com.pake.nsqlproject.data.jikan.JikanWithoutMeta
 import com.pake.nsqlproject.databinding.FragmentSearchBookBinding
-import com.pake.nsqlproject.model.JikanAdapter
+import com.pake.nsqlproject.model.ApiItemAdapter
 import com.pake.nsqlproject.ui.addbook.AddBookFragment
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
-class SearchBookFragment : Fragment(), JikanAdapter.OnItemClickListener {
+class SearchBookFragment : Fragment(), ApiItemAdapter.OnItemClickListener {
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private var _binding : FragmentSearchBookBinding? = null
@@ -33,9 +31,9 @@ class SearchBookFragment : Fragment(), JikanAdapter.OnItemClickListener {
     private lateinit var jikanAllData: JikanAllData
     private lateinit var jikanWithoutMeta: JikanWithoutMeta
 
-    private lateinit var jikanAdapter: JikanAdapter
-    private lateinit var jikanItem: JikanItem
-    private var itemsList: MutableList<JikanItem> = mutableListOf()
+    private lateinit var apiItemAdapter: ApiItemAdapter
+    private lateinit var apiItem: ApiItem
+    private var itemsList: MutableList<ApiItem> = mutableListOf()
 
     private lateinit var searchView: SearchView
 
@@ -83,10 +81,9 @@ class SearchBookFragment : Fragment(), JikanAdapter.OnItemClickListener {
                         if (synopsis == null){
                             synopsis = "??"
                         }
-                        if (id != null && title != null && image != null){
-                            jikanItem = JikanItem(id, title, image, chapters, synopsis, members)
-                            itemsList.add(jikanItem)
-                        }
+                            apiItem = ApiItem(id!!, title!!, image!!, chapters, synopsis, members)
+                            itemsList.add(apiItem)
+
                     }
                 }else{
                     jikanWithoutMeta = Json.decodeFromString(response)
@@ -95,18 +92,18 @@ class SearchBookFragment : Fragment(), JikanAdapter.OnItemClickListener {
                         val id = it.mal_id
                         val title = it.title
                         val image = it.images?.jpg?.image_url
-                        var chapters = it.chapters
-                        var synopsis = it.synopsis
+                        var chapters2 = it.chapters
+                        var synopsis2 = it.synopsis
                         val members = it.members
 
-                        if (chapters == null){
-                            chapters = -1
+                        if (chapters2 == null){
+                            chapters2 = -1
                         }
-                        if (synopsis == null){
-                            synopsis = "??"
+                        if (synopsis2 == null){
+                            synopsis2 = "??"
                         }
-                        jikanItem = JikanItem(id!!, title!!, image!!, chapters!!, synopsis!!,members)
-                        itemsList.add(jikanItem)
+                        apiItem = ApiItem(id!!, title!!, image!!, chapters2, synopsis2,members)
+                        itemsList.add(apiItem)
                     }
                 }
                 initRecycler()
@@ -121,11 +118,17 @@ class SearchBookFragment : Fragment(), JikanAdapter.OnItemClickListener {
         val recyclerView = binding.rvJikanItems
         recyclerView.layoutManager = GridLayoutManager(context, 2)
 
-        itemsList.sortByDescending { it.members }
-        itemsList = itemsList.toSet().toList() as MutableList<JikanItem>
+        if (itemsList.isNotEmpty()) {
+            itemsList.sortByDescending { it.members }
+            itemsList = itemsList.toSet().toList() as MutableList<ApiItem>
+        }
 
-        jikanAdapter = JikanAdapter(itemsList,this)
-        recyclerView.adapter = jikanAdapter
+        /*if (itemsList.isEmpty()) {
+            binding.tvNoResults.visibility = View.VISIBLE
+        }*/
+
+        apiItemAdapter = ApiItemAdapter(itemsList,this)
+        recyclerView.adapter = apiItemAdapter
     }
 
     override fun onItemClick(position: Int) {

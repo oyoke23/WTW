@@ -3,15 +3,14 @@ package com.pake.nsqlproject.model
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.pake.nsqlproject.R
-import com.pake.nsqlproject.data.JikanItem
+import com.pake.nsqlproject.data.ApiItem
 import com.pake.nsqlproject.databinding.JikanItemBinding
 import com.pake.nsqlproject.ui.searchbook.SearchBookFragment
 import com.squareup.picasso.Picasso
 
-class JikanAdapter(private val itemList: List<JikanItem>, private val clickListener: SearchBookFragment): RecyclerView.Adapter<JikanAdapter.ItemHolder>() {
+class ApiItemAdapter(private val itemList: List<ApiItem>, private val clickListener: SearchBookFragment): RecyclerView.Adapter<ApiItemAdapter.ItemHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -27,7 +26,7 @@ class JikanAdapter(private val itemList: List<JikanItem>, private val clickListe
     inner class ItemHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
         private val binding = JikanItemBinding.bind(view)
 
-        fun render(item: JikanItem) {
+        fun render(item: ApiItem) {
             binding.tvTitle.text = item.title
             Picasso.get().load(item.image).into(binding.imgItem)
         }

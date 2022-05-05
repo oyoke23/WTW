@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pake.nsqlproject.data.AllData
 import com.pake.nsqlproject.data.CompareBook
-import com.pake.nsqlproject.data.JikanItem
+import com.pake.nsqlproject.data.ApiItem
 
 class SharedViewModel: ViewModel() {
     private var _allData = MutableLiveData<AllData>()
@@ -17,8 +17,8 @@ class SharedViewModel: ViewModel() {
     private var _listName2 = MutableLiveData<String>()
     val listName2: MutableLiveData<String> = _listName2
 
-    private var _jikanItem = MutableLiveData<JikanItem>()
-    val jikanItem: MutableLiveData<JikanItem> = _jikanItem
+    private var _apiItem = MutableLiveData<ApiItem>()
+    val apiItem: MutableLiveData<ApiItem> = _apiItem
 
     fun saveAllData(data: AllData) {
         _allData.value = data
@@ -29,7 +29,7 @@ class SharedViewModel: ViewModel() {
         _listName1.value = listName1
         _listName2.value = listName2
     }
-    fun saveJikanItem(jikanItem: JikanItem) {
-        _jikanItem.value = jikanItem
+    fun saveJikanItem(apiItem: ApiItem) {
+        _apiItem.value = apiItem
     }
 }

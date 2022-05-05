@@ -1,6 +1,5 @@
 package com.pake.nsqlproject.ui.addbook
 
-import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
@@ -86,7 +85,7 @@ class AddBookFragment : DialogFragment() {
         val manageData = ManageData(requireContext())
         var tempData = sharedViewModel.allData.value
 
-        val item = sharedViewModel.jikanItem.value!!
+        val item = sharedViewModel.apiItem.value!!
         tempData?.personalList?.get(binding.spLists.selectedItemPosition)?.books?.add(
             Book(
                 item.mal_id,
