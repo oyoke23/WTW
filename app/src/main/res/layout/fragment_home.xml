@@ -16,7 +16,7 @@
         android:layout_marginTop="10dp"
         app:tabIndicatorGravity="stretch"
         app:tabGravity="center"
-        app:tabIndicatorColor="@color/blue_9"
+        app:tabIndicatorColor="#80014362"
         app:tabSelectedTextColor="@color/white"
         app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorHeight="1dp"
