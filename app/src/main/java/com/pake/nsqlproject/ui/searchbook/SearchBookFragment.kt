@@ -24,7 +24,7 @@ import com.pake.nsqlproject.ui.addbook.AddBookFragment
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
-class SearchBookFragment : Fragment() {
+class SearchBookFragment : Fragment(), JikanAdapter.OnItemClickListener {
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private var _binding : FragmentSearchBookBinding? = null
@@ -84,13 +84,13 @@ class SearchBookFragment : Fragment() {
                             synopsis = "??"
                         }
                         if (id != null && title != null && image != null){
-                            jikanItem = JikanItem(id, title, image, chapters, synopsis,members)
+                            jikanItem = JikanItem(id, title, image, chapters, synopsis, members)
                             itemsList.add(jikanItem)
                         }
-                        Log.i("JIKAN ITEM:", itemsList.toString())
                     }
                 }else{
                     jikanWithoutMeta = Json.decodeFromString(response)
+                    Log.i("JIKAN WITHOUT META:", jikanWithoutMeta.toString())
                     jikanWithoutMeta.data.forEach {
                         val id = it.mal_id
                         val title = it.title
@@ -107,12 +107,8 @@ class SearchBookFragment : Fragment() {
                         }
                         jikanItem = JikanItem(id!!, title!!, image!!, chapters!!, synopsis!!,members)
                         itemsList.add(jikanItem)
-
-                        Log.i("JIKAN WITHOUT META ITEM:", itemsList.toString())
-
                     }
                 }
-
                 initRecycler()
             },
             { error ->
@@ -126,19 +122,19 @@ class SearchBookFragment : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(context, 2)
 
         itemsList.sortByDescending { it.members }
-        val sortedItemsList = itemsList.toSet().toList()
+        itemsList = itemsList.toSet().toList() as MutableList<JikanItem>
 
-        jikanAdapter = JikanAdapter(sortedItemsList,this)
+        jikanAdapter = JikanAdapter(itemsList,this)
         recyclerView.adapter = jikanAdapter
     }
 
-    fun onItemClick(position: Int) {
+    override fun onItemClick(position: Int) {
         val item = itemsList[position]
         sharedViewModel.saveJikanItem(item)
         AddBookFragment().show(childFragmentManager, "AddBookFragment")
     }
 
-    fun onItemLongClick(p0: View?, position: Int) {
+    override fun onItemLongClick(p0: View?, position: Int) {
 
     }
 }
