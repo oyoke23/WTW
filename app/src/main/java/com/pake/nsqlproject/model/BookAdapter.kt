@@ -27,11 +27,20 @@ class BookAdapter(private val bookList: List<Book>, private val clickListener: B
         private val binding = ItemBookBinding.bind(view)
 
         fun render(book: Book) {
-            binding.tvTitle.text = book.name
+            if (book.name.length > 18) {
+                val newString = book.name.substring(0, 18) + "..."
+                binding.tvTitle.text = newString
+            } else {
+                binding.tvTitle.text = book.name
+            }
             Picasso.get().load(book.image).into(binding.ivBook)
             binding.tvStatus.text = book.status
             binding.tvReadCh.text = book.readCh.toString()
-            binding.tvTotalCh.text = book.totalCh.toString()
+            if (book.totalCh == -1) {
+                binding.tvTotalCh.text = "???"
+            } else {
+                binding.tvTotalCh.text = book.totalCh.toString()
+            }
             binding.tvScore.text = book.score
         }
 

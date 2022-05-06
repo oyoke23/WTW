@@ -30,9 +30,12 @@
         <entry key="app/src/main/res/layout/fragment_edit_book.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_edit_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_search_book.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/item_book.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_compare_book.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/jikan_item.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout/new_item_book.xml" value="0.5" />
         <entry key="app/src/main/res/layout/spinner_item.xml" value="0.215625" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
         <entry key="app/src/main/res/menu/popup_menu_books.xml" value="0.5785123966942148" />
