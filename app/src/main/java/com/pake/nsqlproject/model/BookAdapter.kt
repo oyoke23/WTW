@@ -33,7 +33,7 @@ class BookAdapter(private val bookList: List<Book>, private val clickListener: B
             } else {
                 binding.tvTitle.text = book.name
             }
-            Picasso.get().load(book.image).into(binding.ivBook)
+            Picasso.get().load(book.image).into(binding.ivItem)
             binding.tvStatus.text = book.status
             binding.tvReadCh.text = book.readCh.toString()
             if (book.totalCh == -1) {
