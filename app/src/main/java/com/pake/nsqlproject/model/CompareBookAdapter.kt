@@ -8,6 +8,7 @@ import com.pake.nsqlproject.R
 import com.pake.nsqlproject.data.CompareBook
 import com.pake.nsqlproject.databinding.ItemCompareBookBinding
 import com.pake.nsqlproject.ui.comparebooklist.CompareBookListFragment
+import com.squareup.picasso.Picasso
 
 class CompareBookAdapter(private val bookList: List<CompareBook>, private val clickListener: CompareBookListFragment): RecyclerView.Adapter<CompareBookAdapter.BookHolder>() {
 
@@ -29,6 +30,7 @@ class CompareBookAdapter(private val bookList: List<CompareBook>, private val cl
 
             if (compareBook.book_1 != null) {
                 binding.tvTitle.text = compareBook.book_1?.name
+                Picasso.get().load(compareBook.book_1?.image).into(binding.ivItem)
                 binding.tvUserScore1.text = compareBook.book_1?.score.toString()
                 binding.tvUserStatus1.text = compareBook.book_1?.status
                 binding.tvUserReadCh1.text = compareBook.book_1?.readCh.toString()
@@ -42,6 +44,7 @@ class CompareBookAdapter(private val bookList: List<CompareBook>, private val cl
 
             if (compareBook.book_2 != null) {
                 binding.tvTitle.text = compareBook.book_2?.name
+                Picasso.get().load(compareBook.book_2?.image).into(binding.ivItem)
                 binding.tvUserScore2.text = compareBook.book_2?.score.toString()
                 binding.tvUserStatus2.text = compareBook.book_2?.status
                 binding.tvUserReadCh2.text = compareBook.book_2?.readCh.toString()
