@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pake.nsqlproject.R
+import com.pake.nsqlproject.SharedViewModel
 import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.data.PersonalList
 import com.pake.nsqlproject.databinding.FragmentBookListBinding
@@ -19,6 +21,8 @@ import com.pake.nsqlproject.ui.editbook.EditBookFragment
 
 
 class BookListFragment(var personalList: PersonalList) : Fragment(), BookAdapter.OnItemClickListener {
+
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private var _binding : FragmentBookListBinding? = null
     private val binding get() = _binding!!
@@ -102,8 +106,7 @@ class BookListFragment(var personalList: PersonalList) : Fragment(), BookAdapter
         var output: Book? = null
         var listPosition: Int = 0
 
-        val manageData = ManageData(requireContext())
-        val allData = manageData.getData()
+        val allData = sharedViewModel.allData.value
         if (allData != null) {
             for ((index, list) in allData.personalList.withIndex()) {
                 if (list.id == personalList.id){

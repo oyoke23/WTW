@@ -1,6 +1,8 @@
 package com.pake.nsqlproject.ui.addlist
 
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +30,9 @@ class AddListFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddListBinding.inflate(inflater, container, false)
+        if (dialog != null && dialog!!.window != null) {
+            dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
         binding.btnAddList.setOnClickListener {
             handleAddList()
             dismiss()

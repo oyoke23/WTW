@@ -1,6 +1,8 @@
 package com.pake.nsqlproject.ui.editlist
 
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +28,9 @@ class EditListFragment(private var personalList: PersonalList) : DialogFragment(
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentEditListBinding.inflate(inflater, container, false)
+        if (dialog != null && dialog!!.window != null) {
+            dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
         mainEditList()
         binding.btnAddList.setOnClickListener {
             handleEditList()
