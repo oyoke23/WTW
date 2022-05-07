@@ -73,16 +73,16 @@ class CompareListsDialogFragment : DialogFragment() {
         val diffList = ArrayList<CompareBook>()
 
         data1List?.forEach { book ->
-            if (!diffList.any { it.book_1?.name == book.name }) {
+            if (!diffList.any { it.book_1?.id == book.id }) {
                 diffList.add(CompareBook(book, null))
             }
         }
 
         data2List?.forEach { book ->
-            if (!diffList.any { it.book_1?.name == book.name || it.book_2?.name == book.name }) {
+            if (!diffList.any { it.book_1?.id == book.id || it.book_2?.id == book.id }) {
                 diffList.add(CompareBook(null, book))
             } else {
-                diffList.find { it.book_1?.name == book.name || it.book_2?.name == book.name }?.let {
+                diffList.find { it.book_1?.id == book.id || it.book_2?.id == book.id }?.let {
                     it.book_2 = book
                 }
             }
