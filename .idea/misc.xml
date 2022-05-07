@@ -21,7 +21,7 @@
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/fragment_add_book.xml" value="0.4365482233502538" />
-        <entry key="app/src/main/res/layout/fragment_add_list.xml" value="0.15611814345991562" />
+        <entry key="app/src/main/res/layout/fragment_add_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/fragment_book_list.xml" value="0.1519925857275255" />
         <entry key="app/src/main/res/layout/fragment_compare_book_list.xml" value="0.35260416666666666" />
