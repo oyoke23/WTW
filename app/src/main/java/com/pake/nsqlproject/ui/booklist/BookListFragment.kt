@@ -117,7 +117,7 @@ class BookListFragment(var personalList: PersonalList) : Fragment(), BookAdapter
             val booksIterable = allData.personalList[listPosition].books.iterator()
             while (booksIterable.hasNext()) {
                 var iterableBook = booksIterable.next()
-                if (iterableBook.name == book.name) {
+                if (iterableBook.id == book.id) {
                     output = book
                     break
                 }
