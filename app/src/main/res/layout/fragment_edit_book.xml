@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.editbook.EditBookFragment"
-    android:background="#014362">
+    android:background="@drawable/dialog_fragment_style">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="300dp"

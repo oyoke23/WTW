@@ -2,6 +2,8 @@ package com.pake.nsqlproject.ui.addbook
 
 import android.annotation.SuppressLint
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -31,6 +33,9 @@ class AddBookFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddBookBinding.inflate(inflater, container, false)
+        if (dialog != null && dialog!!.window != null) {
+            dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
         mainAddBook()
         binding.btnAddBook.setOnClickListener {
             addBook()

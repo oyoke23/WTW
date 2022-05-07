@@ -1,6 +1,8 @@
 package com.pake.nsqlproject.ui.editbook
 
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -31,6 +33,9 @@ class EditBookFragment(private var book: Book, private var listPosition: Int) : 
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentEditBookBinding.inflate(inflater, container, false)
+        if (dialog != null && dialog!!.window != null) {
+            dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
         mainEditBook()
         binding.btnEditBook.setOnClickListener {
             handleEditBook()

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/dialog_fragment_style.xml" value="0.141" />
         <entry key="app/src/main/res/drawable-v24/ic_baseline_add_book_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23177083333333334" />
         <entry key="app/src/main/res/drawable/book_rounded_edge.xml" value="0.23177083333333334" />

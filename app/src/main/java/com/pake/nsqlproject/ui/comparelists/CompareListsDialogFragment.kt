@@ -1,5 +1,7 @@
 package com.pake.nsqlproject.ui.comparelists
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -27,6 +29,9 @@ class CompareListsDialogFragment : DialogFragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentCompareListsBinding.inflate(inflater, container, false)
+        if (dialog != null && dialog!!.window != null) {
+            dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
         main()
         binding.btnCompareList.setOnClickListener {
             compareData()

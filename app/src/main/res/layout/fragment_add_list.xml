@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.addlist.AddListFragment"
-    android:background="#014362">
+    android:background="@drawable/dialog_fragment_style">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="300dp"
