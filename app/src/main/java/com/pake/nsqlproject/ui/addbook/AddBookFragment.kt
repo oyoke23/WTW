@@ -1,6 +1,9 @@
 package com.pake.nsqlproject.ui.addbook
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,6 +33,9 @@ class AddBookFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddBookBinding.inflate(inflater, container, false)
+        if (dialog != null && dialog!!.window != null) {
+            dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
         mainAddBook()
         binding.btnAddBook.setOnClickListener {
             addBook()
@@ -39,6 +45,9 @@ class AddBookFragment : DialogFragment() {
     }
 
     private fun mainAddBook() {
+        // Get api item
+        val apiItem = sharedViewModel.apiItem.value!!
+
         // Adapter for "Lists" spinner
         activity?.let { it ->
             val personalLists = sharedViewModel.allData.value?.personalList
@@ -67,6 +76,20 @@ class AddBookFragment : DialogFragment() {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 binding.spStatus.adapter = adapter
             }
+        }
+
+        // Set data to the fields
+        if (apiItem.title.length > 20) {
+            val newString = apiItem.title.substring(0, 20) + "..."
+            binding.tvItemTitle.text = newString
+        } else {
+            binding.tvItemTitle.text = apiItem.title
+        }
+
+        if (apiItem.chapters == -1){
+            binding.tvTotalCh.text = "???"
+        } else {
+            binding.tvTotalCh.text = apiItem.chapters.toString()
         }
     }
 

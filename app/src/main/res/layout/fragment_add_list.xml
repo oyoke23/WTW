@@ -1,17 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.addlist.AddListFragment"
-    android:background="#014362">
+    android:background="@drawable/dialog_fragment_style">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="300dp"
-        android:layout_height="600dp"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="600dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineVertical1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.18"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineVertical2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.81"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.37" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
 
         <TextView
             android:id="@+id/tvAddListTitle"
@@ -20,23 +49,80 @@
             android:text="Add a new list"
             android:textColor="#ffffff"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.611" />
 
-        <EditText
-            android:id="@+id/etListName"
-            android:layout_width="150dp"
+        <TextView
+            android:id="@+id/tvItemSubtitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="List name"
-            android:textColor="#ffffff"
-            android:textColorHint="#ffffff"
-            android:textSize="20sp" />
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:paddingHorizontal="15dp"
+            android:text="Insert a title for your list"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAddListTitle"
+            app:layout_constraintVertical_bias="0.085" />
 
-        <Button
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guidelineVertical1"
+            app:layout_constraintEnd_toEndOf="@id/guidelineVertical2"
+            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal1"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal2">
+
+            <TextView
+                android:id="@+id/tvList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Name"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/etListName"/>
+
+            <EditText
+                android:id="@+id/etListName"
+                android:layout_width="165dp"
+                android:layout_height="40dp"
+                android:textSize="15sp"
+                android:hint="List name"
+                android:background="@drawable/select_list"
+                android:gravity="center"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvList"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+          <Button
             android:id="@+id/btnAddList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add list"
             android:textColor="#ffffff"
-            android:textSize="20sp"/>
-    </LinearLayout>
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal2"
+            app:layout_constraintStart_toEndOf="@id/guidelineVertical1"
+            app:layout_constraintEnd_toEndOf="@id/guidelineVertical2"
+            app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintVertical_bias="0.2"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
