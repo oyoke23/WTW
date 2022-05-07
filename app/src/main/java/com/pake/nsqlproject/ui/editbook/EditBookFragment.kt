@@ -52,7 +52,12 @@ class EditBookFragment(private var book: Book, private var listPosition: Int) : 
     }
 
     private fun mainEditBook() {
-        binding.tvBookTitle.text = book.name
+        if (book.name.length > 30) {
+            val newString = book.name.substring(0, 30) + "..."
+            binding.tvItemTitle.text = newString
+        } else {
+            binding.tvItemTitle.text = book.name
+        }
         activity?.let {
             ArrayAdapter.createFromResource(
                 it.applicationContext,
@@ -67,8 +72,13 @@ class EditBookFragment(private var book: Book, private var listPosition: Int) : 
             }
         }
 
-        binding.etReadChapter.setText(book.readCh)
-        binding.etTotalChapters.setText(book.totalCh)
+        Log.i("Read chapter", book.readCh.toString())
+        binding.etReadChapter.setText(book.readCh.toString())
+        if (book.totalCh == -1) {
+                binding.tvTotalCh.text = "???"
+        } else {
+            binding.tvTotalCh.text = book.totalCh.toString()
+        }
         binding.etScore.setText(book.score)
     }
     private fun parseStatusOutput(status: Int): String {
@@ -98,7 +108,6 @@ class EditBookFragment(private var book: Book, private var listPosition: Int) : 
         if (tempData != null) {
             tempData.personalList[listPosition].books.indexOf(book).let {
                 tempData.personalList[listPosition].books[it].readCh = binding.etReadChapter.text.toString().toInt()
-                tempData.personalList[listPosition].books[it].totalCh = binding.etTotalChapters.text.toString().toInt()
                 tempData.personalList[listPosition].books[it].score = binding.etScore.text.toString()
                 tempData.personalList[listPosition].books[it].status = parseStatusOutput(binding.spStatus.selectedItemPosition)
                 manageData.setData(tempData)
