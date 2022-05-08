@@ -1,7 +1,5 @@
 package com.pake.nsqlproject.ui.home
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*

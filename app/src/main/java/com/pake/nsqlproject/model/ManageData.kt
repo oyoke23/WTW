@@ -1,7 +1,10 @@
 package com.pake.nsqlproject.model
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
+import androidx.core.content.ContextCompat.startActivity
+import com.pake.nsqlproject.MainActivity
 import com.pake.nsqlproject.data.AllData
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*

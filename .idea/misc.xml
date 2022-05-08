@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/drawable/tab_indicator.xml" value="0.229" />
         <entry key="app/src/main/res/drawable/title_book.xml" value="0.23177083333333334" />
         <entry key="app/src/main/res/layout-v28/fragment_compare_lists.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.215625" />
@@ -35,12 +36,13 @@
         <entry key="app/src/main/res/layout/item_book.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_compare_book.xml" value="0.75" />
         <entry key="app/src/main/res/layout/jikan_item.xml" value="0.35260416666666666" />
-        <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.215625" />
+        <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/new_item_book.xml" value="0.5" />
         <entry key="app/src/main/res/layout/spinner_item.xml" value="0.215625" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
         <entry key="app/src/main/res/menu/popup_menu_books.xml" value="0.5785123966942148" />
         <entry key="app/src/main/res/menu/popup_menu_lists.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/toolbar_search.xml" value="0.1953125" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.229" />
         <entry key="app/src/main/res/xml/file_paths.xml" value="0.26614583333333336" />
         <entry key="app/src/main/res/xml/root_preferences.xml" value="0.5" />
