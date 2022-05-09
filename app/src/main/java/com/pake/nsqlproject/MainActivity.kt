@@ -4,18 +4,17 @@ import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
+import com.pake.nsqlproject.data.AllData
 import com.pake.nsqlproject.databinding.ActivityMainBinding
-import com.pake.nsqlproject.ui.addbook.AddBookFragment
+import com.pake.nsqlproject.model.ManageData
 import com.pake.nsqlproject.ui.addlist.AddListFragment
 import com.pake.nsqlproject.ui.comparelists.CompareListsDialogFragment
 
@@ -25,15 +24,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
 
+    private val manageData : ManageData by lazy {
+        ManageData(baseContext)
+    }
+
+    private lateinit var allData: AllData
     override fun onCreate(savedInstanceState: Bundle?) {
+        //getData()
         setTheme(R.style.Theme_NSQLProject)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         drawerLayout = binding.drawerLayout
-
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
         toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -41,6 +45,8 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+        allData = manageData.getData()!!
+        binding.navView.getHeaderView(0).findViewById<android.widget.TextView>(R.id.tvUser).text = allData.personalInfo.name
 
         val navigationView: NavigationView = binding.navView
         navigationView.setNavigationItemSelectedListener {
@@ -101,4 +107,14 @@ class MainActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
+/*
+
+    private fun getData(){
+        val sharedPreferences = baseContext.getSharedPreferences("data", Context.MODE_PRIVATE)
+        val data = sharedPreferences.getString("data", "")
+        println("NUESTRA DATA CONTIENE LOS SIGUIENTES DATOS: $data")
+        if (data == ""){
+            startActivity(Intent(this, CreateAccountActivity::class.java))
+        }
+    }*/
 }

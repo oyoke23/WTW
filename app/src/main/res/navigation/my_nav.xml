@@ -101,5 +101,10 @@
         android:name="com.pake.nsqlproject.ui.searchbook.SearchBookFragment"
         android:label="fragment_search_book"
         tools:layout="@layout/fragment_search_book" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.pake.nsqlproject.ui.aboutus.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
 
 </navigation>
