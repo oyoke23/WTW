@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.volley.Request
@@ -42,6 +43,7 @@ class SearchBookFragment : Fragment(), ApiItemAdapter.OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Search Book"
         _binding = FragmentSearchBookBinding.inflate(inflater, container, false)
         searchView = binding.searchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
