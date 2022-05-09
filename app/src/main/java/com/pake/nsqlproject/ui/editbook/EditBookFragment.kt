@@ -18,6 +18,8 @@ import com.pake.nsqlproject.SharedViewModel
 import com.pake.nsqlproject.data.Book
 import com.pake.nsqlproject.databinding.FragmentEditBookBinding
 import com.pake.nsqlproject.model.ManageData
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 class EditBookFragment(private var book: Book, private var listPosition: Int) : DialogFragment() {
 
@@ -38,8 +40,36 @@ class EditBookFragment(private var book: Book, private var listPosition: Int) : 
         }
         mainEditBook()
         binding.btnEditBook.setOnClickListener {
-            handleEditBook()
-            dismiss()
+            if(binding.etReadChapter.text.toString().isNotEmpty() &&
+                !binding.etReadChapter.text.contains(".") &&
+                !binding.etReadChapter.text.contains(",") &&
+                binding.etScore.text.toString().isNotEmpty() &&
+                binding.etScore.text.toString().matches(Regex("^\\d+(\\.\\d+)?$"))&&
+                binding.etScore.text.toString().toDouble() > 0 &&
+                binding.etScore.text.toString().toDouble() <= 10) {
+                if(binding.tvTotalCh.text.toString() == "???"){
+                    handleEditBook()
+                    dismiss()
+                }else if(binding.etReadChapter.text.toString().toInt() < binding.tvTotalCh.text.toString().toInt()){
+                    handleEditBook()
+                    dismiss()
+                } else if (binding.etReadChapter.text.toString().toInt() > binding.tvTotalCh.text.toString().toInt()){
+                    Toast.makeText(context, "You read more chapters than the book has?", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+            else if (binding.etReadChapter.text.toString().isEmpty()){
+                Toast.makeText(context, "Please enter the chapter you read", Toast.LENGTH_SHORT).show()
+            }
+            else if (binding.etReadChapter.text.contains(".") || binding.etReadChapter.text.contains(",")){
+                Toast.makeText(context, "Don't use points or commas", Toast.LENGTH_SHORT).show()
+            }
+            else if(!binding.etScore.text.toString().matches(Regex("^\\d+(\\.\\d+)?$"))){
+                Toast.makeText(context, "Please enter a valid score", Toast.LENGTH_SHORT).show()
+            }
+            else if (binding.etScore.text.toString().isEmpty() || binding.etScore.text.toString().toDouble() < 1 || binding.etScore.text.toString().toDouble() > 10){
+                Toast.makeText(context, "Please enter your score (1-10)", Toast.LENGTH_SHORT).show()
+            }
         }
         return binding.root
     }
@@ -110,10 +140,12 @@ class EditBookFragment(private var book: Book, private var listPosition: Int) : 
     private fun handleEditBook() {
         val manageData = ManageData(requireContext())
         val tempData = sharedViewModel.allData.value
+        val score = BigDecimal(binding.etScore.text.toString()).setScale(2, RoundingMode.HALF_UP).toDouble()
+        val scoreString = score.toString()
         if (tempData != null) {
             tempData.personalList[listPosition].books.indexOf(book).let {
                 tempData.personalList[listPosition].books[it].readCh = binding.etReadChapter.text.toString().toInt()
-                tempData.personalList[listPosition].books[it].score = binding.etScore.text.toString()
+                tempData.personalList[listPosition].books[it].score = scoreString
                 tempData.personalList[listPosition].books[it].status = parseStatusOutput(binding.spStatus.selectedItemPosition)
                 manageData.setData(tempData)
                 Toast.makeText(requireContext(), "Book edited!", Toast.LENGTH_SHORT).show()

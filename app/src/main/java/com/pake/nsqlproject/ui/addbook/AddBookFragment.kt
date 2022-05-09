@@ -19,6 +19,8 @@ import com.pake.nsqlproject.R
 import com.pake.nsqlproject.SharedViewModel
 import com.pake.nsqlproject.databinding.FragmentAddBookBinding
 import com.pake.nsqlproject.model.ManageData
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 
 class AddBookFragment : DialogFragment() {
@@ -38,15 +40,13 @@ class AddBookFragment : DialogFragment() {
         }
         mainAddBook()
         binding.btnAddBook.setOnClickListener {
-
             if(binding.etReadChapter.text.toString().isNotEmpty() &&
                 !binding.etReadChapter.text.contains(".") &&
                 !binding.etReadChapter.text.contains(",") &&
                 binding.etScore.text.toString().isNotEmpty() &&
-                binding.etScore.text.toString().toInt() > 0 &&
-                binding.etScore.text.toString().toInt() < 11 &&
-                !binding.etScore.text.contains(".") &&
-                !binding.etScore.text.contains(",")) {
+                binding.etScore.text.toString().matches(Regex("^\\d+(\\.\\d+)?$"))&&
+                binding.etScore.text.toString().toDouble() > 0 &&
+                binding.etScore.text.toString().toDouble() <= 10) {
                     if(binding.tvTotalCh.text.toString() == "???"){
                         addBook()
                         dismiss()
@@ -61,10 +61,13 @@ class AddBookFragment : DialogFragment() {
             else if (binding.etReadChapter.text.toString().isEmpty()){
                 Toast.makeText(context, "Please enter the chapter you read", Toast.LENGTH_SHORT).show()
             }
-            else if (binding.etReadChapter.text.contains(".") || binding.etReadChapter.text.contains(",") || binding.etScore.text.contains(".") || binding.etScore.text.contains(",")){
+            else if (binding.etReadChapter.text.contains(".") || binding.etReadChapter.text.contains(",")){
                 Toast.makeText(context, "Don't use points or commas", Toast.LENGTH_SHORT).show()
             }
-            else if (binding.etScore.text.toString().isEmpty() || binding.etScore.text.toString().toInt() < 1 || binding.etScore.text.toString().toInt() > 10){
+            else if(!binding.etScore.text.toString().matches(Regex("^\\d+(\\.\\d+)?$"))){
+                Toast.makeText(context, "Please enter a valid score", Toast.LENGTH_SHORT).show()
+            }
+            else if (binding.etScore.text.toString().isEmpty() || binding.etScore.text.toString().toDouble() < 1 || binding.etScore.text.toString().toDouble() > 10){
                 Toast.makeText(context, "Please enter your score (1-10)", Toast.LENGTH_SHORT).show()
             }
         }
@@ -136,6 +139,8 @@ class AddBookFragment : DialogFragment() {
         var tempData = sharedViewModel.allData.value
 
         val item = sharedViewModel.apiItem.value!!
+        val score = BigDecimal(binding.etScore.text.toString()).setScale(2, RoundingMode.HALF_UP).toDouble()
+        val scoreString = score.toString()
         tempData?.personalList?.get(binding.spLists.selectedItemPosition)?.books?.add(
             Book(
                 item.mal_id,
@@ -145,14 +150,13 @@ class AddBookFragment : DialogFragment() {
                 parseStatus(binding.spStatus.selectedItemPosition),
                 binding.etReadChapter.text.toString().toInt(),
                 item.chapters,
-                binding.etScore.text.toString()
+                scoreString
             )
         )
 
         manageData.setData(tempData!!)
         addedBook = true
         Toast.makeText(requireContext(), "Book added", Toast.LENGTH_SHORT).show()
-        // TODO: Clear data from fields and go back to home fragment
     }
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
