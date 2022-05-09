@@ -4,27 +4,32 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.core.content.ContextCompat.startActivity
-import com.pake.nsqlproject.MainActivity
 import com.pake.nsqlproject.data.AllData
+import com.pake.nsqlproject.data.Friend
+import com.pake.nsqlproject.data.PersonalInfo
+import com.pake.nsqlproject.data.PersonalList
+import com.pake.nsqlproject.ui.createaccount.CreateAccountActivity
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
-import java.io.IOException
 
 class ManageData (private val context: Context) {
-    fun getData(): AllData? {
+    fun getData(): AllData {
         val sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE)
-        var data = sharedPreferences.getString("data", "")
+        val data = sharedPreferences.getString("data", "")
 
         if (data === null || data.isEmpty()) {
-            Log.i("ManageData", "No data found")
-            val jsonFileString = getJsonDataFromAsset(context, "data.json")
-            sharedPreferences.edit().putString("data", jsonFileString).apply()
-            data = jsonFileString
+            val personalList: MutableList<PersonalList> = mutableListOf()
+            val friendList: MutableList<Friend> = mutableListOf()
+            val intent = Intent(context, CreateAccountActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(context, intent, null)
+            return AllData(PersonalInfo("","","",""),personalList,friendList)
         } else {
             Log.i("ManageData", "Data found")
+
         }
 
-        return data?.let { Json.decodeFromString<AllData>(it) }
+        return data.let { Json.decodeFromString<AllData>(it) }
     }
 
     fun setData(data: AllData?) {
@@ -32,17 +37,5 @@ class ManageData (private val context: Context) {
         val sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE)
         sharedPreferences.edit().putString("data", json).apply()
     }
-
-    private fun getJsonDataFromAsset(context: Context, fileName: String): String? {
-        val jsonString: String
-        try {
-            jsonString = context.assets.open(fileName).bufferedReader().use { it.readText() }
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
-            return null
-        }
-        return jsonString
-    }
-
 }
 

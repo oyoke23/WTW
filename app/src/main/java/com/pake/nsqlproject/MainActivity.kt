@@ -1,7 +1,6 @@
 package com.pake.nsqlproject
 
 import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,11 +12,11 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
+import com.pake.nsqlproject.data.AllData
 import com.pake.nsqlproject.databinding.ActivityMainBinding
 import com.pake.nsqlproject.model.ManageData
 import com.pake.nsqlproject.ui.addlist.AddListFragment
 import com.pake.nsqlproject.ui.comparelists.CompareListsDialogFragment
-import com.pake.nsqlproject.ui.login.CreateAccountActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,8 +28,9 @@ class MainActivity : AppCompatActivity() {
         ManageData(baseContext)
     }
 
+    private lateinit var allData: AllData
     override fun onCreate(savedInstanceState: Bundle?) {
-        getData()
+        //getData()
         setTheme(R.style.Theme_NSQLProject)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         super.onCreate(savedInstanceState)
@@ -45,8 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
-        val allData = manageData.getData()!!
-        println(allData.personalInfo.name)
+        allData = manageData.getData()!!
         binding.navView.getHeaderView(0).findViewById<android.widget.TextView>(R.id.tvUser).text = allData.personalInfo.name
 
         val navigationView: NavigationView = binding.navView
@@ -108,12 +107,14 @@ class MainActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
+/*
 
     private fun getData(){
         val sharedPreferences = baseContext.getSharedPreferences("data", Context.MODE_PRIVATE)
         val data = sharedPreferences.getString("data", "")
+        println("NUESTRA DATA CONTIENE LOS SIGUIENTES DATOS: $data")
         if (data == ""){
             startActivity(Intent(this, CreateAccountActivity::class.java))
         }
-    }
+    }*/
 }
