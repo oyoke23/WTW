@@ -34,7 +34,12 @@ class CompareBookAdapter(private val bookList: List<CompareBook>, private val cl
                 binding.tvUserScore1.text = compareBook.book_1?.score.toString()
                 binding.tvUserStatus1.text = compareBook.book_1?.status
                 binding.tvUserReadCh1.text = compareBook.book_1?.readCh.toString()
-                binding.tvUserTotalCh1.text = compareBook.book_1?.totalCh.toString()
+                if (compareBook.book_1?.totalCh == -1){
+                    binding.tvUserTotalCh1.text = "???"
+                }
+                else{
+                    binding.tvUserTotalCh1.text = compareBook.book_1?.totalCh.toString()
+                }
             } else {
                 binding.tvUserScore1.text = "-"
                 binding.tvUserStatus1.text = "-"
@@ -48,7 +53,12 @@ class CompareBookAdapter(private val bookList: List<CompareBook>, private val cl
                 binding.tvUserScore2.text = compareBook.book_2?.score.toString()
                 binding.tvUserStatus2.text = compareBook.book_2?.status
                 binding.tvUserReadCh2.text = compareBook.book_2?.readCh.toString()
-                binding.tvUserTotalCh2.text = compareBook.book_2?.totalCh.toString()
+                if (compareBook.book_2?.totalCh == -1){
+                    binding.tvUserTotalCh2.text = "???"
+                }
+                else{
+                    binding.tvUserTotalCh2.text = compareBook.book_2?.totalCh.toString()
+                }
             } else {
                 binding.tvUserScore2.text = "-"
                 binding.tvUserStatus2.text = "-"
