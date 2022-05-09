@@ -34,8 +34,13 @@ class AddListFragment : DialogFragment() {
             dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
         binding.btnAddList.setOnClickListener {
-            handleAddList()
-            dismiss()
+            if (binding.etListName.text.toString().isNotEmpty()) {
+                handleAddList()
+                dismiss()
+            }
+            else {
+                Toast.makeText(context, "Please enter a list name", Toast.LENGTH_SHORT).show()
+            }
         }
         return binding.root
     }

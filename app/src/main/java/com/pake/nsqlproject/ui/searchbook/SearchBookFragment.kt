@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.volley.Request
@@ -41,12 +43,16 @@ class SearchBookFragment : Fragment(), ApiItemAdapter.OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Search Book"
         _binding = FragmentSearchBookBinding.inflate(inflater, container, false)
         searchView = binding.searchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     getData(query)
+                }
+                else  {
+                    Toast.makeText(context, "Please enter a item name", Toast.LENGTH_SHORT).show()
                 }
                 return false;
             }
@@ -106,11 +112,15 @@ class SearchBookFragment : Fragment(), ApiItemAdapter.OnItemClickListener {
                         itemsList.add(apiItem)
                     }
                 }
+                if (itemsList.isEmpty()){
+                    Toast.makeText(context, "No results found", Toast.LENGTH_SHORT).show()
+                }
                 initRecycler()
             },
             { error ->
                 error.printStackTrace()
             })
+
         queue.add(jsonRequest)
     }
 
@@ -122,10 +132,6 @@ class SearchBookFragment : Fragment(), ApiItemAdapter.OnItemClickListener {
             itemsList.sortByDescending { it.members }
             itemsList = itemsList.toSet().toList() as MutableList<ApiItem>
         }
-
-        /*if (itemsList.isEmpty()) {
-            binding.tvNoResults.visibility = View.VISIBLE
-        }*/
 
         apiItemAdapter = ApiItemAdapter(itemsList,this)
         recyclerView.adapter = apiItemAdapter
