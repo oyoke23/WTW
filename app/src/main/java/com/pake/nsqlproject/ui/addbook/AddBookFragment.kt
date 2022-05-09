@@ -38,8 +38,35 @@ class AddBookFragment : DialogFragment() {
         }
         mainAddBook()
         binding.btnAddBook.setOnClickListener {
-            addBook()
-            dismiss()
+
+            if(binding.etReadChapter.text.toString().isNotEmpty() &&
+                !binding.etReadChapter.text.contains(".") &&
+                !binding.etReadChapter.text.contains(",") &&
+                binding.etScore.text.toString().isNotEmpty() &&
+                binding.etScore.text.toString().toInt() > 0 &&
+                binding.etScore.text.toString().toInt() < 11 &&
+                !binding.etScore.text.contains(".") &&
+                !binding.etScore.text.contains(",")) {
+                    if(binding.tvTotalCh.text.toString() == "???"){
+                        addBook()
+                        dismiss()
+                    }else if(binding.etReadChapter.text.toString().toInt() < binding.tvTotalCh.text.toString().toInt()){
+                        addBook()
+                        dismiss()
+                    } else if (binding.etReadChapter.text.toString().toInt() > binding.tvTotalCh.text.toString().toInt()){
+                        Toast.makeText(context, "You read more chapters than the book has?", Toast.LENGTH_SHORT).show()
+                    }
+
+            }
+            else if (binding.etReadChapter.text.toString().isEmpty()){
+                Toast.makeText(context, "Please enter the chapter you read", Toast.LENGTH_SHORT).show()
+            }
+            else if (binding.etReadChapter.text.contains(".") || binding.etReadChapter.text.contains(",") || binding.etScore.text.contains(".") || binding.etScore.text.contains(",")){
+                Toast.makeText(context, "Don't use points or commas", Toast.LENGTH_SHORT).show()
+            }
+            else if (binding.etScore.text.toString().isEmpty() || binding.etScore.text.toString().toInt() < 1 || binding.etScore.text.toString().toInt() > 10){
+                Toast.makeText(context, "Please enter your score (1-10)", Toast.LENGTH_SHORT).show()
+            }
         }
         return binding.root
     }

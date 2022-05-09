@@ -170,15 +170,16 @@
                     android:id="@+id/etReadChapter"
                     android:layout_width="65dp"
                     android:layout_height="40dp"
-                    android:textSize="15sp"
-                    android:inputType="number"
-                    android:gravity="center"
-                    android:textColor="@color/white"
                     android:background="@drawable/select_list"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:singleLine="true"
                     app:layout_constraintEnd_toStartOf="@id/tvSeparator"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintHorizontal_bias="0" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvSeparator"
@@ -235,6 +236,7 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:textColor="@color/white"
+                android:singleLine="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvScore" />

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NSQLProject">
         <activity
-            android:name="com.pake.nsqlproject.ui.login.CreateAccountActivity"
+            android:name="com.pake.nsqlproject.ui.createaccount.CreateAccountActivity"
             android:exported="false"/>
         <activity
             android:name=".MainActivity"

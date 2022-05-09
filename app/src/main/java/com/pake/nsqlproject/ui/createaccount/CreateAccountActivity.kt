@@ -1,4 +1,4 @@
-package com.pake.nsqlproject.ui.login
+package com.pake.nsqlproject.ui.createaccount
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +19,7 @@ class CreateAccountActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateAccountBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.root.visibility = android.view.View.VISIBLE
+
         val personalList = mutableListOf<PersonalList>()
         val friendsList = mutableListOf<Friend>()
         binding.btnLogin.setOnClickListener {
