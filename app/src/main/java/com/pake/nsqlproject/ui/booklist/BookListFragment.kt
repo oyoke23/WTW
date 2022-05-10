@@ -36,6 +36,9 @@ class BookListFragment(var personalList: PersonalList) : Fragment(), BookAdapter
         _binding = FragmentBookListBinding.inflate(inflater, container, false)
         books = personalList.books
         initRecycler(personalList)
+        if (books.isEmpty()) {
+            binding.tvEmptyList.visibility = View.VISIBLE
+        }
         return binding.root
     }
 
