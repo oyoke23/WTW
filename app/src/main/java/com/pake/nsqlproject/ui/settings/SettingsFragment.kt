@@ -44,19 +44,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun main() {
         findPreference<Preference>("import_data")?.setOnPreferenceClickListener {
-            Toast.makeText(context, "import", Toast.LENGTH_SHORT).show()
             Log.d("SettingsFragment", "import")
             AlertDialog.Builder(requireContext())
                 .setTitle("This lists are from...?")
                 .setItems(R.array.import_options) { _, which ->
                     when (which) {
                         0 -> {
-                            Toast.makeText(context, "It's mine", Toast.LENGTH_SHORT).show()
                             fromOption = 0
                             getFileFromUser()
                         }
                         1 -> {
-                            Toast.makeText(context, "It's from my friend", Toast.LENGTH_SHORT).show()
                             fromOption = 1
                             getFileFromUser()
                         }
@@ -106,7 +103,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             type = "application/json"
         }
         resultLauncher.launch(intent)
-
     }
 
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -119,81 +115,130 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 stringBuilder.append(it)
             }
 
-            if (stringBuilder.isNotEmpty()) {
-                val tempData = sharedViewModel.allData.value!!
-                if (fromOption != null) {
-                   when (fromOption) {
-                       0 -> {
-                           // Parse data from file
-                           val jsonObject = Json.decodeFromString(AllData.serializer(), stringBuilder.toString())
+            try {
+                if (stringBuilder.isNotEmpty()) {
+                    val tempData = sharedViewModel.allData.value!!
+                    if (fromOption != null) {
+                        when (fromOption) {
+                            0 -> {
+                                // Parse data from file
+                                val jsonObject = Json.decodeFromString(
+                                    AllData.serializer(),
+                                    stringBuilder.toString()
+                                )
 
-                           // Add the lists
-                           jsonObject.personalList.forEach { list ->
-                               // get the count of the list with the same name or name(number)
-                               val count = tempData.personalList.count { it1 -> it1.name == list.name ||
-                                       it1.name == list.name + "(" + tempData.personalList.count { it.name == list.name } + ")" }
+                                // Add the lists
+                                jsonObject.personalList.forEach { list ->
+                                    // get the count of the list with the same name or name(number)
+                                    val count = tempData.personalList.count { it1 ->
+                                        it1.name == list.name ||
+                                                it1.name == list.name + "(" + tempData.personalList.count { it.name == list.name } + ")"
+                                    }
 
-                               if (tempData.personalList.isEmpty()) {
-                                   tempData.personalList.add(
-                                       PersonalList(
-                                           "1", "-1", if (count == 0) list.name else list.name+("($count)"), list.books
-                                       )
-                                   )
-                               } else {
-                                   tempData.personalList.add(
-                                       PersonalList(
-                                           tempData.personalList.last().id.toInt().plus(1)
-                                               .toString(),
-                                           "-1",  if (count == 0) list.name else list.name+("($count)"), list.books
-                                       )
-                                   )
-                               }
+                                    if (tempData.personalList.isEmpty()) {
+                                        tempData.personalList.add(
+                                            PersonalList(
+                                                "1",
+                                                "-1",
+                                                if (count == 0) list.name else list.name + ("($count)"),
+                                                list.books
+                                            )
+                                        )
+                                    } else {
+                                        tempData.personalList.add(
+                                            PersonalList(
+                                                tempData.personalList.last().id.toInt().plus(1)
+                                                    .toString(),
+                                                "-1",
+                                                if (count == 0) list.name else list.name + ("($count)"),
+                                                list.books
+                                            )
+                                        )
+                                    }
 
-                           }
-                           //set new data
-                           manageData.setData(tempData)
-                       }
-                       1 -> {
-                           // Parse data from file
-                           val jsonObject = Json.decodeFromString(AllData.serializer(), stringBuilder.toString())
+                                }
+                                //set new data
+                                manageData.setData(tempData)
+                            }
+                            1 -> {
+                                // Parse data from file
+                                val jsonObject = Json.decodeFromString(
+                                    AllData.serializer(),
+                                    stringBuilder.toString()
+                                )
 
-                           var userId: String? = null;
-                           // Check if the user is in the friend list
-                           if (tempData.friendList.isEmpty()) {
-                               // Add the user to the friend list
-                               tempData.friendList.add(Friend(
-                                   "1",
-                                   jsonObject.personalInfo.name,jsonObject.personalInfo.hash))
-                               userId = "1"
-                           } else {
-                               // if the friend is already in the list, we don't add it
-                               if (tempData.friendList.none { it.hash == jsonObject.personalInfo.hash }) {
-                                   // Add the user to the friend list
-                                   tempData.friendList.add(Friend(
-                                       tempData.friendList.last().id.toInt().plus(1).toString(),
-                                       jsonObject.personalInfo.name,jsonObject.personalInfo.hash))
+                                var userId: String? = null;
+                                // Check if the user is in the friend list
+                                if (tempData.friendList.isEmpty()) {
+                                    // Add the user to the friend list
+                                    tempData.friendList.add(
+                                        Friend(
+                                            "1",
+                                            jsonObject.personalInfo.name,
+                                            jsonObject.personalInfo.hash
+                                        )
+                                    )
+                                    userId = "1"
+                                } else {
+                                    // if the friend is already in the list, we don't add it
+                                    if (tempData.friendList.none { it.hash == jsonObject.personalInfo.hash }) {
+                                        // Add the user to the friend list
+                                        tempData.friendList.add(
+                                            Friend(
+                                                tempData.friendList.last().id.toInt().plus(1)
+                                                    .toString(),
+                                                jsonObject.personalInfo.name,
+                                                jsonObject.personalInfo.hash
+                                            )
+                                        )
 
-                                   // Get the user id
-                                   userId = tempData.friendList.last().id
-                               } else {
-                                   // Only get the user id from the friend list
-                                   userId = tempData.friendList.find { it.hash == jsonObject.personalInfo.hash }?.id
-                               }
-                           }
+                                        // Get the user id
+                                        userId = tempData.friendList.last().id
+                                    } else {
+                                        // Only get the user id from the friend list
+                                        userId =
+                                            tempData.friendList.find { it.hash == jsonObject.personalInfo.hash }?.id
+                                    }
+                                }
 
-                           // Add the lists with the user id
-                           jsonObject.personalList.forEach {
-                               tempData.personalList.add(PersonalList(
-                                   tempData.personalList.last().id.toInt().plus(1).toString(),
-                                   userId!!, it.name, it.books))
-                           }
 
-                           manageData.setData(tempData)
-                       }
-                   }
+                                // Add the lists with the user id
+                                jsonObject.personalList.forEach { list ->
+                                    val count = tempData.personalList.count { it1 ->
+                                        it1.name == list.name ||
+                                                it1.name == list.name + "(" + tempData.personalList.count { it.name == list.name } + ")"
+                                    }
+
+                                    if (tempData.personalList.isEmpty()) {
+                                        tempData.personalList.add(
+                                            PersonalList(
+                                                "1",
+                                                userId!!,
+                                                if (count == 0) list.name else list.name + ("($count)"),
+                                                list.books
+                                            )
+                                        )
+                                    } else {
+                                        tempData.personalList.add(
+                                            PersonalList(
+                                                tempData.personalList.last().id.toInt().plus(1)
+                                                    .toString(),
+                                                userId!!,
+                                                if (count == 0) list.name else list.name + ("($count)"),
+                                                list.books
+                                            )
+                                        )
+                                    }
+                                }
+
+                                manageData.setData(tempData)
+                            }
+                        }
+                    }
                 }
+            } catch (e: Exception) {
+                Toast.makeText(context, "Oops, something went wrong!", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 }
