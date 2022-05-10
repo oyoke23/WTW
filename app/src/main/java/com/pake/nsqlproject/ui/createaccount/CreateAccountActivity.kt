@@ -20,6 +20,9 @@ class CreateAccountActivity : AppCompatActivity() {
 
         val personalList = mutableListOf<PersonalList>()
         val friendsList = mutableListOf<Friend>()
+        
+        personalList.add(PersonalList("1","-1","Your first list", mutableListOf<Book>()))
+
         binding.btnLogin.setOnClickListener {
             val alphabet: CharRange = ('0'..'z')
             val randomString: String = List(50) { alphabet.random() }.joinToString("")
