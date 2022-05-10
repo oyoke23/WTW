@@ -104,11 +104,12 @@ class CompareBookListFragment : Fragment(), CompareBookAdapter.OnItemClickListen
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
+        // do nothing
+
     }
 
     override fun onItemLongClick(view: View?, position: Int) {
-        Toast.makeText(context, "Long Clicked", Toast.LENGTH_SHORT).show()
+        // do nothing
     }
 
 
