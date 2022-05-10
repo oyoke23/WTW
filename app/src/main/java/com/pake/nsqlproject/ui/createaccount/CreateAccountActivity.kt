@@ -27,7 +27,6 @@ class CreateAccountActivity : AppCompatActivity() {
                 PersonalInfo(
                     "-1",
                     binding.etUsername.text.toString(),
-                    binding.etEmail.text.toString(),
                     randomString
                 ),
                 personalList,

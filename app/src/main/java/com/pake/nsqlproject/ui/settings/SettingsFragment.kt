@@ -74,8 +74,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
             // Remove friends from data
             allData.friendList.clear()
-            // Remove email from personalInfo
-            allData.personalInfo.email = ""
 
             // Encode data
             val json = Json.encodeToString(allData)

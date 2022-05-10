@@ -23,7 +23,7 @@ class ManageData (private val context: Context) {
             val intent = Intent(context, CreateAccountActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(context, intent, null)
-            return AllData(PersonalInfo("-1","","",""),personalList,friendList)
+            return AllData(PersonalInfo("-1","",""),personalList,friendList)
         } else {
             Log.i("ManageData", "Data found")
 
