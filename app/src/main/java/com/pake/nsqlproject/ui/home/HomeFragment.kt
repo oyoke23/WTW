@@ -168,14 +168,14 @@ class HomeFragment : Fragment() {
         var contador = 0
 
         if (filteredLists != null) {
-            var filteredListsIterator = filteredLists.iterator()
+            val filteredListsIterator = filteredLists.iterator()
 
             while(filteredListsIterator.hasNext()){
 
-                var item = filteredListsIterator.next()
+                val item = filteredListsIterator.next()
                 item.books.clear()
                 for(book in personalLists[contador].books){
-                    if (book.name.contains(newText)){
+                    if (book.name.lowercase().contains(newText.lowercase())){
                         item.books.add(book)
                     }
                 }
