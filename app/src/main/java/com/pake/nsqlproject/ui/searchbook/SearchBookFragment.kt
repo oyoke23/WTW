@@ -2,11 +2,8 @@ package com.pake.nsqlproject.ui.searchbook
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
@@ -14,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.pake.nsqlproject.R
 import com.pake.nsqlproject.SharedViewModel
 import com.pake.nsqlproject.data.ApiItem
 import com.pake.nsqlproject.data.jikan.JikanAllData
@@ -37,7 +35,7 @@ class SearchBookFragment : Fragment(), ApiItemAdapter.OnItemClickListener {
     private lateinit var apiItem: ApiItem
     private var itemsList: MutableList<ApiItem> = mutableListOf()
 
-    private lateinit var searchView: SearchView
+    private var searchMode : Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,23 +43,49 @@ class SearchBookFragment : Fragment(), ApiItemAdapter.OnItemClickListener {
     ): View? {
         (requireActivity() as AppCompatActivity).supportActionBar?.title = "Search Book"
         _binding = FragmentSearchBookBinding.inflate(inflater, container, false)
-        searchView = binding.searchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
-                    getData(query)
+        setHasOptionsMenu(true)
+        getData("")
+        return binding.root
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_search, menu)
+        val searchItem = menu.findItem(R.id.search_button)
+        val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
+
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(newText: String?): Boolean {
+                if (newText != "") {
+                    getData(newText!!)
                 }
-                else  {
-                    Toast.makeText(context, "Please enter a item name", Toast.LENGTH_SHORT).show()
+                if (newText == "" && searchMode) {
+                    getData(newText)
                 }
                 return false;
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
-                return true;
+                return true
             }
         })
-        return binding.root
+        searchView.setOnCloseListener{
+            initRecycler()
+            false
+        }
+
+        val expandListener = object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+                searchMode = true
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+                searchMode = false
+                getData("")
+                return true
+            }
+
+        }
+        searchItem.setOnActionExpandListener(expandListener)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun getData(text: String){

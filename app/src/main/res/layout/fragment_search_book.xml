@@ -7,15 +7,10 @@
     android:orientation="vertical"
     tools:context=".ui.searchbook.SearchBookFragment">
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvJikanItems"
-        android:layout_width="409dp"
-        android:layout_height="681dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="1dp" />
 
 </LinearLayout>
