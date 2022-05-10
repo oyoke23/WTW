@@ -34,6 +34,7 @@ class SearchBookFragment : Fragment(), ApiItemAdapter.OnItemClickListener {
     private lateinit var apiItemAdapter: ApiItemAdapter
     private lateinit var apiItem: ApiItem
     private var itemsList: MutableList<ApiItem> = mutableListOf()
+    private var tempItemsList: MutableList<ApiItem> = mutableListOf()
 
     private var searchMode : Boolean = false
 
@@ -74,12 +75,16 @@ class SearchBookFragment : Fragment(), ApiItemAdapter.OnItemClickListener {
         val expandListener = object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
                 searchMode = true
+                tempItemsList.clear()
+                tempItemsList.addAll(itemsList)
                 return true
             }
 
             override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
                 searchMode = false
-                getData("")
+                itemsList.clear()
+                itemsList.addAll(tempItemsList)
+                initRecycler()
                 return true
             }
 
