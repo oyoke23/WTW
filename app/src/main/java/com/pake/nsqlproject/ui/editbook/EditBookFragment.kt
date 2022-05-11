@@ -50,7 +50,7 @@ class EditBookFragment(private var book: Book, private var listPosition: Int) : 
                 if(binding.tvTotalCh.text.toString() == "???"){
                     handleEditBook()
                     dismiss()
-                }else if(binding.etReadChapter.text.toString().toInt() < binding.tvTotalCh.text.toString().toInt()){
+                }else if(binding.etReadChapter.text.toString().toInt() <= binding.tvTotalCh.text.toString().toInt()){
                     handleEditBook()
                     dismiss()
                 } else if (binding.etReadChapter.text.toString().toInt() > binding.tvTotalCh.text.toString().toInt()){
