@@ -50,7 +50,7 @@ class AddBookFragment : DialogFragment() {
                     if(binding.tvTotalCh.text.toString() == "???"){
                         addBook()
                         dismiss()
-                    }else if(binding.etReadChapter.text.toString().toInt() < binding.tvTotalCh.text.toString().toInt()){
+                    }else if(binding.etReadChapter.text.toString().toInt() <= binding.tvTotalCh.text.toString().toInt()){
                         addBook()
                         dismiss()
                     } else if (binding.etReadChapter.text.toString().toInt() > binding.tvTotalCh.text.toString().toInt()){
